@@ -55,7 +55,9 @@ export default function Footer() {
           <span>
             © 2024–2026 {company.name}. All rights reserved.
           </span>
-          <span>Premium VTC &amp; Private Transport · Paris, France</span>
+          <span>
+            {company.legalName} · SIREN {company.siren} · VAT {company.vat}
+          </span>
         </div>
       </div>
     </footer>

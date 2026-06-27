@@ -39,10 +39,11 @@ src/
 
 All text, services, fleet, reviews, and **contact details** live in
 `src/data/content.ts`. Update the `company` object there to change the phone,
-email, address, WhatsApp number, etc. everywhere at once.
+email, address, WhatsApp number, legal info, etc. everywhere at once.
 
-> ⚠️ The phone / email / address in `content.ts` are **placeholders** for the
-> 786 Transport brand. Replace them with the real business details before going live.
+The `company` object holds the live business details — phone
+(+33 6 50 98 23 88), email (786transport.rs@gmail.com), the Saint-Denis
+address, and the SAS legal info (SIREN / VAT) shown in the footer.
 
 ## Features
 

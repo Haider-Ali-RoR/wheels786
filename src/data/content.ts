@@ -12,15 +12,19 @@ export const company = {
   tagline: "Premium Private Chauffeur & VTC in Paris",
   description:
     "Specialized in high-end passenger transport across Paris, Île-de-France, and all of Europe. Professional drivers, a modern fleet, available 24/7.",
-  // --- Contact (PLACEHOLDERS — update before launch) ---
-  phoneDisplay: "+33 6 13 11 01 08",
-  phoneRaw: "+33613110108",
-  whatsappRaw: "33613110108",
-  email: "contact@786transport.fr",
-  address: "8 Rue André Messager, 75018 Paris, France",
+  // --- Contact ---
+  phoneDisplay: "+33 6 50 98 23 88",
+  phoneRaw: "+33650982388",
+  whatsappRaw: "33650982388",
+  email: "786transport.rs@gmail.com",
+  address: "5 Cité de la Courtille — Rue des Maraudes, 93200 Saint-Denis, France",
   rating: 5,
   reviewCount: 3000,
   hours: "24/7 — 7 days a week",
+  // --- Legal (SAS) ---
+  legalName: "786 Transport SAS",
+  siren: "814 062 121",
+  vat: "FR12814062121",
 };
 
 export const navLinks = [
