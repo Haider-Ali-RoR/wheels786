@@ -48,8 +48,17 @@ address, and the SAS legal info (SIREN / VAT) shown in the footer.
 ## Features
 
 - Fixed navbar with scroll state + mobile menu
-- Full-screen hero with the brand fleet photo
-- Services, premium fleet, "why us", coverage, and testimonials sections
-- Booking form that compiles a quote request and opens it in **WhatsApp**
+- Full-screen hero (black Mercedes on a Paris street)
+- Services + **3-class fleet** (E-Class Business, V-Class Van, S-Class First Class) with capacity & "from €" pricing
+- **Popular Routes & Fares** section with fixed, all-inclusive prices
+- "Why us" guarantees (flight tracking, free cancellation, fixed prices, 24/7) + coverage + testimonials
+- **FAQ accordion**
+- **Structured booking widget** — Distance/Hourly toggle, pick-up & drop-off dropdowns, vehicle class, date/time, passengers — compiles a quote request and opens it in **WhatsApp**
 - Floating WhatsApp + call buttons
 - Scroll-reveal animations, fully responsive down to mobile
+
+## Image credits
+
+The hero and the V-Class / S-Class fleet photos are free-license stock from
+[Pexels](https://www.pexels.com) (free for commercial use, no attribution
+required). The E-Class photos and logo are the client's own.

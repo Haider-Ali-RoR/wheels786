@@ -1,6 +1,6 @@
 import { Icon } from "./Icons";
 import { company } from "../data/content";
-import heroImg from "../assets/mercedes-front.jpeg";
+import heroImg from "../assets/hero-paris.jpeg";
 
 export default function Hero() {
   return (

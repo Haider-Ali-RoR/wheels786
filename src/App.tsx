@@ -3,9 +3,11 @@ import Hero from "./components/Hero";
 import Stats from "./components/Stats";
 import Services from "./components/Services";
 import Fleet from "./components/Fleet";
+import Routes from "./components/Routes";
 import WhyUs from "./components/WhyUs";
 import Coverage from "./components/Coverage";
 import Testimonials from "./components/Testimonials";
+import Faq from "./components/Faq";
 import Contact from "./components/Contact";
 import CtaBand from "./components/CtaBand";
 import Footer from "./components/Footer";
@@ -23,9 +25,11 @@ export default function App() {
         <Stats />
         <Services />
         <Fleet />
+        <Routes />
         <WhyUs />
         <Coverage />
         <Testimonials />
+        <Faq />
         <CtaBand />
         <Contact />
       </main>

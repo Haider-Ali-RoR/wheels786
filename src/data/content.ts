@@ -1,9 +1,7 @@
 /**
  * Centralized site content & configuration for 786 Transport.
- * Edit business details (phone, email, address) here — they propagate everywhere.
- *
- * NOTE: Contact details below are placeholders for the 786 Transport brand.
- * Replace with the real numbers/address/email before going live.
+ * Edit business details, fleet, pricing, routes, and FAQ here —
+ * they propagate across the whole site.
  */
 
 export const company = {
@@ -11,7 +9,7 @@ export const company = {
   shortName: "786",
   tagline: "Premium Private Chauffeur & VTC in Paris",
   description:
-    "Specialized in high-end passenger transport across Paris, Île-de-France, and all of Europe. Professional drivers, a modern fleet, available 24/7.",
+    "Specialized in high-end passenger transport across Paris, Île-de-France, and all of Europe. Professional drivers, a modern Mercedes fleet, fixed all-inclusive prices, available 24/7.",
   // --- Contact ---
   phoneDisplay: "+33 6 50 98 23 88",
   phoneRaw: "+33650982388",
@@ -31,36 +29,36 @@ export const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Services", href: "#services" },
   { label: "Fleet", href: "#fleet" },
-  { label: "Why Us", href: "#why" },
+  { label: "Pricing", href: "#pricing" },
   { label: "Reviews", href: "#reviews" },
-  { label: "Contact", href: "#contact" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export const services = [
   {
     icon: "plane",
     title: "Airport Transfers",
-    text: "Reliable pickups and drop-offs for CDG, Orly, and Beauvais. Flight tracking, meet & greet, and fixed prices with no surprises.",
+    text: "Private chauffeur to and from CDG, Orly, Beauvais & Le Bourget. Real-time flight tracking, meet & greet at arrivals, and fixed prices — tolls and parking included.",
+  },
+  {
+    icon: "clock",
+    title: "Hourly Hire (As Directed)",
+    text: "Keep your driver by the hour for meetings, shopping, or multiple stops. Transparent hourly pricing and total flexibility — you stay in control.",
   },
   {
     icon: "briefcase",
-    title: "Business Travel",
-    text: "Punctual, discreet chauffeur service for executives and corporate clients. Travel in comfort while you stay productive.",
-  },
-  {
-    icon: "road",
-    title: "Long Distance",
-    text: "Comfortable intercity and cross-Europe journeys. Travel door to door in a premium sedan instead of crowded trains.",
+    title: "City-to-City Business Travel",
+    text: "Seamless executive journeys between Paris and destinations like Versailles, Disneyland, Reims and beyond. Discreet, punctual, and comfortable.",
   },
   {
     icon: "champagne",
     title: "Events & Occasions",
-    text: "Weddings, galas, nights out, and special events. Arrive in style with a dedicated chauffeur at your service.",
+    text: "Weddings, galas, nights out, and special events. Arrive in style with a dedicated chauffeur at your service throughout the evening.",
   },
   {
-    icon: "clock",
-    title: "Hourly Hire",
-    text: "Book your driver by the hour for meetings, shopping, or multiple stops. Total flexibility for your schedule.",
+    icon: "road",
+    title: "Long Distance & Europe",
+    text: "Door-to-door intercity and cross-Europe travel in a premium Mercedes — a relaxed alternative to crowded trains and flights.",
   },
   {
     icon: "camera",
@@ -69,42 +67,72 @@ export const services = [
   },
 ];
 
+/**
+ * Fleet classes. `image` maps to an imported asset in Fleet.tsx.
+ * `priceFrom` is the lowest transfer price (in €) for that class.
+ */
 export const fleet = [
   {
     name: "Mercedes-Benz E-Class",
-    type: "Business Sedan",
-    image: "front",
-    seats: 3,
+    tier: "Business",
+    image: "eclass",
+    seats: 4,
     luggage: 3,
-    text: "Our flagship sedan — refined, quiet, and impeccably maintained. Ideal for airport transfers and business travel.",
+    priceFrom: 90,
+    badge: "Most Popular",
+    text: "Our signature executive sedan — refined, quiet, and impeccably maintained. The ideal choice for airport transfers and business travel.",
     features: ["Leather interior", "Climate control", "Bottled water", "Phone chargers"],
   },
   {
-    name: "Mercedes-Benz E-Class",
-    type: "Premium Sedan",
-    image: "rear",
+    name: "Mercedes-Benz V-Class",
+    tier: "Van",
+    image: "vclass",
+    seats: 7,
+    luggage: 7,
+    priceFrom: 130,
+    badge: "",
+    text: "Spacious luxury van for families and groups. Travel together in comfort with plenty of room for passengers and luggage.",
+    features: ["Up to 7 seats", "Generous luggage space", "Individual seating", "Child seats on request"],
+  },
+  {
+    name: "Mercedes-Benz S-Class",
+    tier: "First Class",
+    image: "sclass",
     seats: 3,
     luggage: 3,
-    text: "Travel in elegance with our E-Class 4MATIC. Discreet, spacious, and perfect for both city rides and long distances.",
-    features: ["Tinted windows", "Plush seating", "Wi-Fi on request", "Quiet cabin"],
+    priceFrom: 160,
+    badge: "Premium",
+    text: "The pinnacle of comfort and prestige. Our flagship limousine for VIPs and those who expect nothing but the very best.",
+    features: ["Premium leather", "Extra legroom", "Ambient lighting", "Wi-Fi on request"],
   },
 ];
 
+/** Guarantees / why-choose-us (shown in the Why Us section). */
 export const features = [
+  {
+    icon: "tag",
+    title: "Fixed, All-Inclusive Prices",
+    text: "The price you're quoted is the price you pay — tolls and parking included. No surge pricing, no meters, no hidden fees.",
+  },
+  {
+    icon: "plane",
+    title: "Real-Time Flight Tracking",
+    text: "We monitor your flight and adjust your pickup automatically, with free wait time if you land late.",
+  },
+  {
+    icon: "check",
+    title: "Free Cancellation",
+    text: "Plans change. Cancel free of charge with a 100% refund — no penalties, no stress.",
+  },
   {
     icon: "shield",
     title: "Professional Drivers",
     text: "Licensed, experienced, and discreet chauffeurs who know Paris and the region inside out.",
   },
   {
-    icon: "star",
-    title: "Premium Fleet",
-    text: "Modern, immaculately maintained Mercedes vehicles for maximum comfort and safety.",
-  },
-  {
-    icon: "tag",
-    title: "Fixed Prices",
-    text: "Transparent, upfront pricing. The price you're quoted is the price you pay — no hidden fees.",
+    icon: "users",
+    title: "Meet & Greet",
+    text: "Your driver greets you in the arrivals hall with a name sign and helps with your luggage.",
   },
   {
     icon: "clock",
@@ -118,6 +146,18 @@ export const stats = [
   { value: "15K+", label: "Rides Completed" },
   { value: "5★", label: "Average Rating" },
   { value: "24/7", label: "Availability" },
+];
+
+/** Popular fixed-price routes (E-Class starting prices, all-inclusive). */
+export const routes = [
+  { from: "Orly Airport", to: "Paris", price: 90, popular: true },
+  { from: "CDG Airport", to: "Paris", price: 110, popular: true },
+  { from: "Paris", to: "Versailles", price: 110, popular: false },
+  { from: "CDG Airport", to: "Disneyland Paris", price: 110, popular: true },
+  { from: "Orly Airport", to: "Disneyland Paris", price: 120, popular: false },
+  { from: "CDG Airport", to: "Versailles", price: 140, popular: false },
+  { from: "Beauvais Airport", to: "Paris", price: 170, popular: false },
+  { from: "Paris", to: "Reims", price: 290, popular: false },
 ];
 
 export const testimonials = [
@@ -152,12 +192,46 @@ export const coverage = [
   "All of France & Europe",
 ];
 
-export const serviceOptions = [
-  "Airport Transfer",
-  "Business Travel",
-  "Long Distance",
-  "Event / Occasion",
-  "Hourly Hire",
-  "Paris Tour",
-  "Other",
+export const faqs = [
+  {
+    q: "How long does the journey from CDG to central Paris take?",
+    a: "Typically 40–55 minutes depending on traffic and your exact destination. Your driver chooses the fastest route on the day.",
+  },
+  {
+    q: "What happens if my flight is delayed?",
+    a: "We track your flight in real time and adjust your pickup automatically — at no extra cost. You'll never be charged for a delay outside your control.",
+  },
+  {
+    q: "Are your prices really all-inclusive?",
+    a: "Yes. Your quoted fare includes tolls, parking, taxes, and meet & greet. There are no meters, no surge pricing, and no hidden surcharges.",
+  },
+  {
+    q: "Where will my driver meet me at the airport?",
+    a: "Your chauffeur waits in the arrivals hall with a name sign and helps you with your luggage to the vehicle. We cover all terminals at CDG, Orly, Beauvais and Le Bourget.",
+  },
+  {
+    q: "Can I request a child seat?",
+    a: "Absolutely. Child and booster seats are available on request — just mention it when you book, especially for Disneyland transfers.",
+  },
+  {
+    q: "How do I pay, and can I cancel?",
+    a: "We accept card, cash, and bank transfer. Cancellation is free with a full refund, so you can book with complete peace of mind.",
+  },
 ];
+
+/** Locations offered in the booking widget dropdowns. */
+export const bookingLocations = [
+  "Paris (City Center)",
+  "CDG Airport",
+  "Orly Airport",
+  "Beauvais Airport",
+  "Le Bourget Airport",
+  "Disneyland Paris",
+  "Versailles",
+  "Other (specify in notes)",
+];
+
+/** Vehicle class options for the booking widget (derived from the fleet). */
+export const vehicleClasses = fleet.map(
+  (v) => `${v.name} (${v.tier}) — up to ${v.seats} pax`
+);
