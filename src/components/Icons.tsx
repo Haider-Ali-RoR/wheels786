@@ -75,6 +75,12 @@ const icons: Record<string, (s: number) => JSX.Element> = {
   chevron: (s) => (
     <svg {...base(s)}><path d="m6 9 6 6 6-6" /></svg>
   ),
+  car: (s) => (
+    <svg {...base(s)}><path d="M5 11l1.5-4.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11M5 11h14v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H8v1a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-5Z" /><circle cx="7.5" cy="14" r="0.6" /><circle cx="16.5" cy="14" r="0.6" /></svg>
+  ),
+  sparkle: (s) => (
+    <svg {...base(s)}><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18" /></svg>
+  ),
 };
 
 export function Icon({ name, size = 24 }: IconProps & { name: string }) {

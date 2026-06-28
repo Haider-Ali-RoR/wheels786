@@ -79,6 +79,8 @@ export const fleet = [
     seats: 4,
     luggage: 3,
     priceFrom: 90,
+    rateMultiplier: 1,
+    hourly: 60,
     badge: "Most Popular",
     text: "Our signature executive sedan — refined, quiet, and impeccably maintained. The ideal choice for airport transfers and business travel.",
     features: ["Leather interior", "Climate control", "Bottled water", "Phone chargers"],
@@ -90,6 +92,8 @@ export const fleet = [
     seats: 7,
     luggage: 7,
     priceFrom: 130,
+    rateMultiplier: 1.3,
+    hourly: 80,
     badge: "",
     text: "Spacious luxury van for families and groups. Travel together in comfort with plenty of room for passengers and luggage.",
     features: ["Up to 7 seats", "Generous luggage space", "Individual seating", "Child seats on request"],
@@ -101,10 +105,21 @@ export const fleet = [
     seats: 3,
     luggage: 3,
     priceFrom: 160,
+    rateMultiplier: 1.6,
+    hourly: 110,
     badge: "Premium",
     text: "The pinnacle of comfort and prestige. Our flagship limousine for VIPs and those who expect nothing but the very best.",
     features: ["Premium leather", "Extra legroom", "Ambient lighting", "Wi-Fi on request"],
   },
+];
+
+/** Curated routes shown inside the fleet "Fixed Rates" modal (base E-Class €). */
+export const fleetModalRoutes = [
+  { from: "Paris", to: "CDG Airport", base: 110 },
+  { from: "Paris", to: "Orly Airport", base: 90 },
+  { from: "Paris", to: "Disneyland Paris", base: 100 },
+  { from: "Paris", to: "Versailles", base: 110 },
+  { from: "CDG Airport", to: "Disneyland Paris", base: 110 },
 ];
 
 /** Guarantees / why-choose-us (shown in the Why Us section). */
@@ -150,15 +165,19 @@ export const stats = [
 
 /** Popular fixed-price routes (E-Class starting prices, all-inclusive). */
 export const routes = [
-  { from: "Orly Airport", to: "Paris", price: 90, popular: true },
-  { from: "CDG Airport", to: "Paris", price: 110, popular: true },
-  { from: "Paris", to: "Versailles", price: 110, popular: false },
-  { from: "CDG Airport", to: "Disneyland Paris", price: 110, popular: true },
-  { from: "Orly Airport", to: "Disneyland Paris", price: 120, popular: false },
-  { from: "CDG Airport", to: "Versailles", price: 140, popular: false },
-  { from: "Beauvais Airport", to: "Paris", price: 170, popular: false },
-  { from: "Paris", to: "Reims", price: 290, popular: false },
+  { from: "Orly Airport", to: "Paris", price: 90, duration: "~30 min", popular: true },
+  { from: "CDG Airport", to: "Paris", price: 110, duration: "~45 min", popular: true },
+  { from: "Paris", to: "Versailles", price: 110, duration: "~40 min", popular: false },
+  { from: "CDG Airport", to: "Disneyland Paris", price: 110, duration: "~45 min", popular: true },
+  { from: "Orly Airport", to: "Disneyland Paris", price: 120, duration: "~50 min", popular: false },
+  { from: "CDG Airport", to: "Versailles", price: 140, duration: "~60 min", popular: false },
+  { from: "Beauvais Airport", to: "Paris", price: 170, duration: "~1h15", popular: false },
+  { from: "Paris", to: "Disneyland Paris", price: 100, duration: "~45 min", popular: false },
+  { from: "Paris", to: "Reims", price: 290, duration: "~1h45", popular: false },
 ];
+
+/** Default vehicle shown on route cards (base E-Class fare). */
+export const routeVehicleNote = "Mercedes E-Class · 1–4 pax";
 
 export const testimonials = [
   {

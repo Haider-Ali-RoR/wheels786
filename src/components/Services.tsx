@@ -3,7 +3,7 @@ import { services } from "../data/content";
 
 export default function Services() {
   return (
-    <section id="services" className="section">
+    <section id="services" className="section section--alt services">
       <div className="container">
         <div className="section-head reveal">
           <span className="eyebrow">What We Offer</span>
@@ -16,15 +16,19 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="grid-3">
-          {services.map((s) => (
-            <article className="card reveal" key={s.title}>
-              <div className="card__icon">
+        <div className="services__grid">
+          {services.map((s, i) => (
+            <a href="#contact" className="service-card reveal" key={s.title}>
+              <span className="service-card__num">{String(i + 1).padStart(2, "0")}</span>
+              <span className="service-card__icon">
                 <Icon name={s.icon} size={26} />
-              </div>
+              </span>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
-            </article>
+              <span className="service-card__more">
+                Book this service <Icon name="arrow" size={16} />
+              </span>
+            </a>
           ))}
         </div>
       </div>

@@ -5,7 +5,6 @@ import Services from "./components/Services";
 import Fleet from "./components/Fleet";
 import Routes from "./components/Routes";
 import WhyUs from "./components/WhyUs";
-import Coverage from "./components/Coverage";
 import Testimonials from "./components/Testimonials";
 import Faq from "./components/Faq";
 import Contact from "./components/Contact";
@@ -23,12 +22,11 @@ export default function App() {
       <main>
         <Hero />
         <Stats />
-        <Services />
         <Fleet />
         <Routes />
-        <WhyUs />
-        <Coverage />
         <Testimonials />
+        <Services />
+        <WhyUs />
         <Faq />
         <CtaBand />
         <Contact />
