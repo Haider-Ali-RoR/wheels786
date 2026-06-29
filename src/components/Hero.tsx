@@ -15,11 +15,13 @@ export default function Hero() {
         </span>
 
         <h1>
-          Travel Paris in <span className="text-silver">Premium Comfort</span>{" "}
-          with <span className="text-red">786 Transport</span>
+          Travel Paris in <span className="text-silver">Timeless Luxury</span>
         </h1>
 
-        <p>{company.description}</p>
+        <p>
+          Premium Mercedes-Benz chauffeur service. Fixed rates, professional
+          drivers — available 24/7.
+        </p>
 
         <div className="hero__cta">
           <a href="#contact" className="btn btn--primary">

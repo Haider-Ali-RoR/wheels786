@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Icon } from "./Icons";
 import { fleet, fleetModalRoutes } from "../data/content";
 import eclass from "../assets/mercedes-front.jpeg";
@@ -30,13 +31,12 @@ export default function Fleet() {
     <section id="fleet" className="section fleet">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">Our Fleet</span>
+          <span className="eyebrow">The Fleet</span>
           <h2 className="section-title">
             Our <span className="text-silver">Premium Fleet</span>
           </h2>
           <p className="section-sub">
-            Choose from our exclusive collection of Mercedes-Benz vehicles,
-            designed for ultimate comfort and style.
+            A curated Mercedes-Benz collection, for every journey.
           </p>
         </div>
 
@@ -84,7 +84,9 @@ export default function Fleet() {
 
 function FleetModal({ vehicle, onClose }: { vehicle: Vehicle; onClose: () => void }) {
   const mult = vehicle.rateMultiplier;
-  return (
+  // Render at document.body so the fixed overlay escapes any ancestor
+  // stacking/transform context and always covers the full viewport.
+  return createPortal(
     <div className="modal" role="dialog" aria-modal="true" onClick={onClose}>
       <div className="modal__dialog" onClick={(e) => e.stopPropagation()}>
         <button className="modal__close" aria-label="Close" onClick={onClose}>
@@ -137,6 +139,7 @@ function FleetModal({ vehicle, onClose }: { vehicle: Vehicle; onClose: () => voi
           </a>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

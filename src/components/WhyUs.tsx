@@ -13,11 +13,10 @@ export default function WhyUs() {
         <div className="reveal">
           <span className="eyebrow">Why Choose Us</span>
           <h2 className="section-title">
-            The <span className="text-silver">786 Transport</span> Difference
+            The <span className="text-silver">786</span> Difference
           </h2>
           <p className="section-sub">
-            We combine the elegance of a premium fleet with reliable,
-            customer-first service — so every ride feels effortless.
+            A premium fleet and customer-first service — every ride effortless.
           </p>
 
           <div className="why__list">

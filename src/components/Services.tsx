@@ -8,12 +8,9 @@ export default function Services() {
         <div className="section-head reveal">
           <span className="eyebrow">What We Offer</span>
           <h2 className="section-title">
-            Tailored <span className="text-silver">Transport Services</span>
+            Our <span className="text-silver">Services</span>
           </h2>
-          <p className="section-sub">
-            From airport runs to bespoke tours, every journey is handled with
-            professionalism, punctuality, and discretion.
-          </p>
+          <p className="section-sub">Tailor-made travel, just for you.</p>
         </div>
 
         <div className="services__grid">

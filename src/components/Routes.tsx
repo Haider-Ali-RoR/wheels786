@@ -6,13 +6,12 @@ export default function Routes() {
     <section id="pricing" className="section section--alt routes">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">Fixed Prices</span>
+          <span className="eyebrow">Fixed Rates</span>
           <h2 className="section-title">
-            Popular <span className="text-silver">Routes &amp; Fares</span>
+            Fares Without <span className="text-silver">Surprises</span>
           </h2>
           <p className="section-sub">
-            All-inclusive prices — tolls, parking and taxes included. No surge
-            pricing, no meters, no surprises. From-prices shown for our E-Class.
+            All-inclusive prices. No meters, no surge, no hidden fees.
           </p>
         </div>
 
