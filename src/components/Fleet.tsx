@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Icon } from "./Icons";
-import { fleet, fleetModalRoutes } from "../data/content";
+import { fleet } from "../data/content";
 import eclass from "../assets/mercedes-front.jpeg";
 import vclass from "../assets/vclass.jpeg";
 import sclass from "../assets/sclass.jpeg";
@@ -9,8 +9,6 @@ import sclass from "../assets/sclass.jpeg";
 const images: Record<string, string> = { eclass, vclass, sclass };
 
 type Vehicle = (typeof fleet)[number];
-
-const round5 = (n: number) => Math.round(n / 5) * 5;
 
 export default function Fleet() {
   const [active, setActive] = useState<Vehicle | null>(null);
@@ -67,7 +65,7 @@ export default function Fleet() {
                   </span>
                 </div>
                 <span className="fleet-card__rates">
-                  Click to view full rates <Icon name="arrow" size={16} />
+                  View class details <Icon name="arrow" size={16} />
                 </span>
               </div>
             </button>
@@ -83,7 +81,6 @@ export default function Fleet() {
 }
 
 function FleetModal({ vehicle, onClose }: { vehicle: Vehicle; onClose: () => void }) {
-  const mult = vehicle.rateMultiplier;
   // Render at document.body so the fixed overlay escapes any ancestor
   // stacking/transform context and always covers the full viewport.
   return createPortal(
@@ -111,31 +108,33 @@ function FleetModal({ vehicle, onClose }: { vehicle: Vehicle; onClose: () => voi
 
         <div className="modal__rates">
           <div className="modal__rates-head">
-            <h4>Fixed Rates</h4>
-            <span className="modal__rates-note">All-inclusive</span>
+            <h4>Class Highlights</h4>
+            <span className="modal__rates-note">{vehicle.tier}</span>
           </div>
 
-          <ul className="rate-list">
-            {fleetModalRoutes.map((r) => (
-              <li key={`${r.from}-${r.to}`}>
-                <span className="rate-list__route">
-                  {r.from} <span className="rate-list__arrow">→</span> {r.to}
-                </span>
-                <span className="rate-list__price">€{round5(r.base * mult)}</span>
+          <ul className="spec-list">
+            {vehicle.features.map((f) => (
+              <li key={f}>
+                <Icon name="check" size={16} /> {f}
               </li>
             ))}
           </ul>
 
-          <div className="rate-hourly">
-            <div>
-              <span className="rate-hourly__label">Hourly Hire</span>
-              <span className="rate-hourly__sub">As directed · min. 3 hours</span>
+          <div className="modal__specs-grid">
+            <div className="modal__specs-item">
+              <Icon name="users" size={18} />
+              <span className="modal__specs-val">{vehicle.seats}</span>
+              <span className="modal__specs-key">Passengers</span>
             </div>
-            <span className="rate-hourly__price">€{vehicle.hourly}/hr</span>
+            <div className="modal__specs-item">
+              <Icon name="luggage" size={18} />
+              <span className="modal__specs-val">{vehicle.luggage}</span>
+              <span className="modal__specs-key">Luggage</span>
+            </div>
           </div>
 
           <a href="#contact" className="btn btn--primary modal__cta" onClick={onClose}>
-            Book This Vehicle <Icon name="arrow" size={17} />
+            Enquire About This Class <Icon name="arrow" size={17} />
           </a>
         </div>
       </div>

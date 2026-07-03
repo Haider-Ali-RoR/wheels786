@@ -658,33 +658,42 @@ h1, h2, h3, h4 {
   color: var(--red-bright);
   font-weight: 700;
 }
-.rate-list { list-style: none; display: grid; margin-bottom: 18px; }
-.rate-list li {
+.spec-list { list-style: none; display: grid; gap: 2px; margin-bottom: 20px; }
+.spec-list li {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
   padding: 12px 0;
   border-bottom: 1px solid var(--line);
-  font-size: 0.92rem;
+  font-size: 0.94rem;
+  color: var(--text-dim);
 }
-.rate-list__route { color: var(--text-dim); }
-.rate-list__arrow { color: var(--red-bright); margin: 0 3px; }
-.rate-list__price { font-weight: 800; font-size: 1.05rem; white-space: nowrap; }
-.rate-hourly {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.spec-list li svg { color: var(--red-bright); flex: none; }
+.modal__specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 12px;
-  background: rgba(226, 48, 66, 0.08);
-  border: 1px solid rgba(226, 48, 66, 0.25);
-  border-radius: var(--radius-sm);
-  padding: 14px 16px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
-.rate-hourly__label { font-weight: 700; display: block; }
-.rate-hourly__sub { font-size: 0.76rem; color: var(--text-mute); }
-.rate-hourly__price { font-weight: 800; font-size: 1.15rem; color: var(--red-bright); white-space: nowrap; }
+.modal__specs-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  background: rgba(226, 48, 66, 0.06);
+  border: 1px solid rgba(226, 48, 66, 0.22);
+  border-radius: var(--radius-sm);
+  padding: 16px 12px;
+}
+.modal__specs-item svg { color: var(--red-bright); }
+.modal__specs-val { font-weight: 800; font-size: 1.3rem; }
+.modal__specs-key {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-mute);
+}
 .modal__cta { width: 100%; justify-content: center; margin-top: auto; }
 @keyframes modalFade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes modalPop {
@@ -796,47 +805,53 @@ h1, h2, h3, h4 {
   border-radius: 999px;
   box-shadow: 0 6px 16px rgba(192, 24, 42, 0.4);
 }
-.route-card__journey {
+.route-card__route {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+.route-card__stop {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 14px;
+}
+.route-card__dot {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+}
+.route-card__dot--from {
+  border: 2px solid var(--text-mute);
+  background: var(--bg-card);
+  color: var(--text-dim);
+}
+.route-card__dot--to {
+  background: linear-gradient(135deg, var(--red-bright), var(--red));
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(192, 24, 42, 0.4);
+}
+.route-card__line {
+  width: 2px;
+  height: 22px;
+  margin: 2px 0 2px 12px;
+  background: repeating-linear-gradient(180deg, var(--line) 0 5px, transparent 5px 10px);
+}
+.route-card__place { display: flex; flex-direction: column; line-height: 1.15; }
+.route-card__label {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-bottom: 2px;
 }
 .route-card__city {
   font-weight: 600;
-  font-size: 1.04rem;
-  white-space: nowrap;
-}
-.route-card__connector {
-  flex: 1;
-  position: relative;
-  height: 2px;
-  min-width: 26px;
-  background: repeating-linear-gradient(90deg, var(--line) 0 5px, transparent 5px 10px);
-}
-.route-card__connector::before {
-  content: "";
-  position: absolute;
-  left: -2px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  border: 2px solid var(--text-mute);
-  background: var(--bg-card);
-}
-.route-card__connector::after {
-  content: "";
-  position: absolute;
-  right: -3px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--red-bright), var(--red));
-  box-shadow: 0 0 0 3px rgba(226, 48, 66, 0.15);
+  font-size: 1.12rem;
 }
 .route-card__foot {
   display: flex;
@@ -847,35 +862,14 @@ h1, h2, h3, h4 {
   padding-top: 20px;
   border-top: 1px solid var(--line);
 }
-.route-card__pricewrap { display: flex; flex-direction: column; line-height: 1.1; }
-.route-card__from {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-mute);
-  margin-bottom: 3px;
-}
-.route-card__price {
-  font-size: 2.1rem;
-  font-weight: 800;
-  background: linear-gradient(180deg, #ffffff, #c6c6cc);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 .route-card__btn { padding: 11px 22px; font-size: 0.88rem; }
-.route-card__note {
-  display: flex;
+.route-card__time {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 14px;
-  font-size: 0.8rem;
-  color: var(--text-mute);
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-dim);
 }
-.route-card__time { display: inline-flex; align-items: center; gap: 5px; }
 .route-card__time svg { color: var(--red-bright); }
 .routes__note {
   text-align: center;

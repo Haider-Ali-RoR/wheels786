@@ -1,17 +1,18 @@
 import { Icon } from "./Icons";
-import { routes, routeVehicleNote } from "../data/content";
+import { routes } from "../data/content";
 
 export default function Routes() {
   return (
     <section id="pricing" className="section section--alt routes">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">Fixed Rates</span>
+          <span className="eyebrow">Where We Travel</span>
           <h2 className="section-title">
-            Fares Without <span className="text-silver">Surprises</span>
+            Popular <span className="text-silver">Travel Points</span>
           </h2>
           <p className="section-sub">
-            All-inclusive prices. No meters, no surge, no hidden fees.
+            Door-to-door between Paris, the airports, and beyond. Contact us for
+            a tailored quote on any journey.
           </p>
         </div>
 
@@ -27,35 +28,45 @@ export default function Routes() {
                 </span>
               )}
 
-              <div className="route-card__journey">
-                <span className="route-card__city">{r.from}</span>
-                <span className="route-card__connector" />
-                <span className="route-card__city">{r.to}</span>
+              <div className="route-card__route">
+                <div className="route-card__stop">
+                  <span className="route-card__dot route-card__dot--from">
+                    <Icon name="pin" size={13} />
+                  </span>
+                  <div className="route-card__place">
+                    <span className="route-card__label">From</span>
+                    <span className="route-card__city">{r.from}</span>
+                  </div>
+                </div>
+
+                <span className="route-card__line" />
+
+                <div className="route-card__stop">
+                  <span className="route-card__dot route-card__dot--to">
+                    <Icon name="pin" size={13} />
+                  </span>
+                  <div className="route-card__place">
+                    <span className="route-card__label">To</span>
+                    <span className="route-card__city">{r.to}</span>
+                  </div>
+                </div>
               </div>
 
               <div className="route-card__foot">
-                <div className="route-card__pricewrap">
-                  <span className="route-card__from">From</span>
-                  <span className="route-card__price">€{r.price}</span>
-                </div>
-                <a href="#contact" className="btn btn--primary route-card__btn">
-                  Book <Icon name="arrow" size={16} />
-                </a>
-              </div>
-
-              <div className="route-card__note">
-                <span>{routeVehicleNote}</span>
                 <span className="route-card__time">
-                  <Icon name="clock" size={13} /> {r.duration}
+                  <Icon name="clock" size={14} /> {r.duration}
                 </span>
+                <a href="#contact" className="btn btn--primary route-card__btn">
+                  Enquire <Icon name="arrow" size={16} />
+                </a>
               </div>
             </article>
           ))}
         </div>
 
         <p className="routes__note reveal">
-          Prices include all tolls, parking, and meet &amp; greet. Van (up to 7
-          pax) and S-Class available at higher rates.{" "}
+          Every transfer is door-to-door with tolls, parking, and meet &amp;
+          greet included. Van (up to 7 pax) and S-Class also available.{" "}
           <a href="#fleet">View all vehicles →</a>
         </p>
       </div>

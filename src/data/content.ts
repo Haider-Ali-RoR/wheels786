@@ -113,15 +113,6 @@ export const fleet = [
   },
 ];
 
-/** Curated routes shown inside the fleet "Fixed Rates" modal (base E-Class €). */
-export const fleetModalRoutes = [
-  { from: "Paris", to: "CDG Airport", base: 110 },
-  { from: "Paris", to: "Orly Airport", base: 90 },
-  { from: "Paris", to: "Disneyland Paris", base: 100 },
-  { from: "Paris", to: "Versailles", base: 110 },
-  { from: "CDG Airport", to: "Disneyland Paris", base: 110 },
-];
-
 /** Guarantees / why-choose-us (shown in the Why Us section). */
 export const features = [
   {
@@ -163,21 +154,18 @@ export const stats = [
   { value: "24/7", label: "Availability" },
 ];
 
-/** Popular fixed-price routes (E-Class starting prices, all-inclusive). */
+/** Popular travel points / routes shown in the "Travel Points" section. */
 export const routes = [
-  { from: "Orly Airport", to: "Paris", price: 90, duration: "~30 min", popular: true },
-  { from: "CDG Airport", to: "Paris", price: 110, duration: "~45 min", popular: true },
-  { from: "Paris", to: "Versailles", price: 110, duration: "~40 min", popular: false },
-  { from: "CDG Airport", to: "Disneyland Paris", price: 110, duration: "~45 min", popular: true },
-  { from: "Orly Airport", to: "Disneyland Paris", price: 120, duration: "~50 min", popular: false },
-  { from: "CDG Airport", to: "Versailles", price: 140, duration: "~60 min", popular: false },
-  { from: "Beauvais Airport", to: "Paris", price: 170, duration: "~1h15", popular: false },
-  { from: "Paris", to: "Disneyland Paris", price: 100, duration: "~45 min", popular: false },
-  { from: "Paris", to: "Reims", price: 290, duration: "~1h45", popular: false },
+  { from: "Orly Airport", to: "Paris", duration: "~30 min", popular: true },
+  { from: "CDG Airport", to: "Paris", duration: "~45 min", popular: true },
+  { from: "Paris", to: "Versailles", duration: "~40 min", popular: false },
+  { from: "CDG Airport", to: "Disneyland Paris", duration: "~45 min", popular: true },
+  { from: "Orly Airport", to: "Disneyland Paris", duration: "~50 min", popular: false },
+  { from: "CDG Airport", to: "Versailles", duration: "~60 min", popular: false },
+  { from: "Beauvais Airport", to: "Paris", duration: "~1h15", popular: false },
+  { from: "Paris", to: "Disneyland Paris", duration: "~45 min", popular: false },
+  { from: "Paris", to: "Reims", duration: "~1h45", popular: false },
 ];
-
-/** Default vehicle shown on route cards (base E-Class fare). */
-export const routeVehicleNote = "Mercedes E-Class · 1–4 pax";
 
 export const testimonials = [
   {
