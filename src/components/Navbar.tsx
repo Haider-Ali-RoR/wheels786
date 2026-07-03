@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "./Icons";
 import { company, navLinks } from "../data/content";
 import logo from "../assets/logo.jpeg";
@@ -6,6 +6,7 @@ import logo from "../assets/logo.jpeg";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -14,8 +15,20 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Close the mobile menu when clicking anywhere outside the navbar.
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [open]);
+
   return (
-    <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
+    <header ref={headerRef} className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
       <div className="container nav__inner">
         <a href="#home" className="nav__brand" onClick={() => setOpen(false)}>
           <img src={logo} alt="786 Transport logo" className="nav__logo" />
@@ -59,16 +72,6 @@ export default function Navbar() {
             {l.label}
           </a>
         ))}
-        <a
-          href={`tel:${company.phoneRaw}`}
-          className="btn btn--ghost"
-          onClick={() => setOpen(false)}
-        >
-          <Icon name="phone" size={18} /> {company.phoneDisplay}
-        </a>
-        <a href="#contact" className="btn btn--primary" onClick={() => setOpen(false)}>
-          Book Now
-        </a>
       </div>
     </header>
   );

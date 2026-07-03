@@ -81,6 +81,12 @@ const icons: Record<string, (s: number) => JSX.Element> = {
   sparkle: (s) => (
     <svg {...base(s)}><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18" /></svg>
   ),
+  calendar: (s) => (
+    <svg {...base(s)}><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 9h18M8 3v4M16 3v4" /></svg>
+  ),
+  mouse: (s) => (
+    <svg {...base(s)}><rect x="7" y="2.5" width="10" height="19" rx="5" /><path d="M12 6.5v3.5" /></svg>
+  ),
 };
 
 export function Icon({ name, size = 24 }: IconProps & { name: string }) {

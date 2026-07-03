@@ -16,8 +16,8 @@ export const company = {
   whatsappRaw: "33650982388",
   email: "786transport.rs@gmail.com",
   address: "5 Cité de la Courtille — Rue des Maraudes, 93200 Saint-Denis, France",
-  rating: 5,
-  reviewCount: 3000,
+  rating: 4.7,
+  reviewCount: "60K",
   hours: "24/7 — 7 days a week",
   // --- Legal (SAS) ---
   legalName: "786 Transport SAS",
@@ -29,7 +29,6 @@ export const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Services", href: "#services" },
   { label: "Fleet", href: "#fleet" },
-  { label: "Pricing", href: "#pricing" },
   { label: "Reviews", href: "#reviews" },
   { label: "FAQ", href: "#faq" },
 ];
@@ -127,8 +126,8 @@ export const features = [
   },
   {
     icon: "check",
-    title: "Free Cancellation",
-    text: "Plans change. Cancel free of charge with a 100% refund — no penalties, no stress.",
+    title: "Flexible Cancellation",
+    text: "Cancel at least 12 hours before pickup and get a 100% refund. Cancellations made within 12 hours of pickup are non-refundable.",
   },
   {
     icon: "shield",
@@ -149,8 +148,8 @@ export const features = [
 
 export const stats = [
   { value: "10+", label: "Years Experience" },
-  { value: "15K+", label: "Rides Completed" },
-  { value: "5★", label: "Average Rating" },
+  { value: "70K+", label: "Rides Completed" },
+  { value: "4.7★", label: "Average Rating" },
   { value: "24/7", label: "Availability" },
 ];
 
@@ -218,11 +217,11 @@ export const faqs = [
   },
   {
     q: "Can I request a child seat?",
-    a: "Absolutely. Child and booster seats are available on request — just mention it when you book, especially for Disneyland transfers.",
+    a: "Absolutely. Child and booster seats are available on request — just mention it when you book, especially when travelling with babies or young children.",
   },
   {
     q: "How do I pay, and can I cancel?",
-    a: "We accept card, cash, and bank transfer. Cancellation is free with a full refund, so you can book with complete peace of mind.",
+    a: "We accept card and cash. Cancel at least 12 hours before pickup for a 100% refund; cancellations made within 12 hours of pickup are non-refundable.",
   },
 ];
 

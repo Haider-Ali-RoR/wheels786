@@ -108,7 +108,7 @@ function FleetModal({ vehicle, onClose }: { vehicle: Vehicle; onClose: () => voi
 
         <div className="modal__rates">
           <div className="modal__rates-head">
-            <h4>Class Highlights</h4>
+            <h4>The Ultimate Experience</h4>
             <span className="modal__rates-note">{vehicle.tier}</span>
           </div>
 

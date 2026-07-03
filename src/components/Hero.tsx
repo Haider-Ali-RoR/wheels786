@@ -34,8 +34,8 @@ export default function Hero() {
       </div>
 
       <a href="#stats" className="hero__scroll" aria-label="Scroll down">
-        Scroll
-        <Icon name="chevron" size={18} />
+        <Icon name="mouse" size={26} />
+        <Icon name="chevron" size={20} />
       </a>
     </section>
   );

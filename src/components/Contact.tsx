@@ -3,7 +3,7 @@ import type { FormEvent } from "react";
 import { Icon } from "./Icons";
 import { company, bookingLocations, vehicleClasses } from "../data/content";
 
-type TripType = "distance" | "hourly";
+type TripType = "distance" | "days" | "hourly";
 
 const initial = {
   tripType: "distance" as TripType,
@@ -13,6 +13,8 @@ const initial = {
   vehicle: vehicleClasses[0],
   date: "",
   time: "",
+  endDate: "",
+  endTime: "",
   passengers: "1",
   name: "",
   phone: "",
@@ -34,13 +36,20 @@ export default function Contact() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const isHourly = form.tripType === "hourly";
+    const isDays = form.tripType === "days";
+    const tripLabel = isHourly
+      ? "Hourly hire"
+      : isDays
+      ? "Daily hire (as directed)"
+      : "Transfer (distance)";
     const lines = [
       `New booking request — ${company.name}`,
-      `Trip type: ${isHourly ? "Hourly hire" : "Transfer (distance)"}`,
+      `Trip type: ${tripLabel}`,
       `Vehicle: ${form.vehicle}`,
       `Pickup: ${form.pickup}`,
       isHourly ? `Duration: ${form.hours} hour(s)` : `Drop-off: ${form.dropoff}`,
-      `Date: ${form.date}  Time: ${form.time}`,
+      `${isDays ? "Start" : "Date"}: ${form.date}  Time: ${form.time}`,
+      isDays ? `End: ${form.endDate}  Time: ${form.endTime}` : "",
       `Passengers: ${form.passengers}`,
       `Name: ${form.name}`,
       `Phone: ${form.phone}`,
@@ -57,7 +66,7 @@ export default function Contact() {
         <div className="section-head reveal">
           <span className="eyebrow">Book Your Ride</span>
           <h2 className="section-title">
-            Reserve in <span className="text-silver">Three Steps</span>
+            Reserve in <span className="text-silver">Minutes</span>
           </h2>
           <p className="section-sub">
             Tell us about your journey and get a fixed, all-inclusive quote — fast.
@@ -142,6 +151,13 @@ export default function Contact() {
                   </button>
                   <button
                     type="button"
+                    className={form.tripType === "days" ? "active" : ""}
+                    onClick={() => set({ tripType: "days" })}
+                  >
+                    <Icon name="calendar" size={16} /> Days
+                  </button>
+                  <button
+                    type="button"
                     className={form.tripType === "hourly" ? "active" : ""}
                     onClick={() => set({ tripType: "hourly" })}
                   >
@@ -158,16 +174,7 @@ export default function Contact() {
                   </select>
                 </div>
 
-                {form.tripType === "distance" ? (
-                  <div className="field">
-                    <label htmlFor="dropoff">Drop-Off Location</label>
-                    <select id="dropoff" value={form.dropoff} onChange={update("dropoff")}>
-                      {bookingLocations.map((o) => (
-                        <option key={o}>{o}</option>
-                      ))}
-                    </select>
-                  </div>
-                ) : (
+                {form.tripType === "hourly" ? (
                   <div className="field">
                     <label htmlFor="hours">Duration (hours)</label>
                     <input
@@ -178,6 +185,15 @@ export default function Contact() {
                       value={form.hours}
                       onChange={update("hours")}
                     />
+                  </div>
+                ) : (
+                  <div className="field">
+                    <label htmlFor="dropoff">Drop-Off Location</label>
+                    <select id="dropoff" value={form.dropoff} onChange={update("dropoff")}>
+                      {bookingLocations.map((o) => (
+                        <option key={o}>{o}</option>
+                      ))}
+                    </select>
                   </div>
                 )}
 
@@ -192,14 +208,27 @@ export default function Contact() {
 
                 <div className="form__row">
                   <div className="field">
-                    <label htmlFor="date">Date</label>
+                    <label htmlFor="date">{form.tripType === "days" ? "Start Date" : "Date"}</label>
                     <input id="date" type="date" value={form.date} onChange={update("date")} required />
                   </div>
                   <div className="field">
-                    <label htmlFor="time">Time</label>
+                    <label htmlFor="time">{form.tripType === "days" ? "Start Time" : "Time"}</label>
                     <input id="time" type="time" value={form.time} onChange={update("time")} required />
                   </div>
                 </div>
+
+                {form.tripType === "days" && (
+                  <div className="form__row">
+                    <div className="field">
+                      <label htmlFor="endDate">End Date</label>
+                      <input id="endDate" type="date" value={form.endDate} onChange={update("endDate")} required />
+                    </div>
+                    <div className="field">
+                      <label htmlFor="endTime">End Time</label>
+                      <input id="endTime" type="time" value={form.endTime} onChange={update("endTime")} required />
+                    </div>
+                  </div>
+                )}
 
                 <div className="form__row">
                   <div className="field">
@@ -238,7 +267,7 @@ export default function Contact() {
                   <Icon name="whatsapp" size={20} /> Get My Quote
                 </button>
                 <p className="form__note">
-                  Free quote · No payment required · Free cancellation
+                  Free quote · No payment required · 100% refund if cancelled 12h+ before pickup
                 </p>
               </form>
             )}
