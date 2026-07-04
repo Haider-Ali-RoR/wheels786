@@ -1,29 +1,89 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { Icon } from "./Icons";
-import { company, bookingLocations, vehicleClasses } from "../data/content";
+import { company, fleet } from "../data/content";
+import eclass from "../assets/mercedes-front.jpeg";
+import vclass from "../assets/vclass.jpeg";
+import sclass from "../assets/sclass.jpeg";
+
+const vehicleImages: Record<string, string> = { eclass, vclass, sclass };
 
 type TripType = "distance" | "days" | "hourly";
 
 const initial = {
   tripType: "distance" as TripType,
-  pickup: bookingLocations[0],
-  dropoff: bookingLocations[1],
+  pickup: "",
+  dropoff: "",
   hours: "3",
-  vehicle: vehicleClasses[0],
+  vehicleIdx: "0",
   date: "",
-  time: "",
+  time: "09:00",
   endDate: "",
-  endTime: "",
-  passengers: "1",
+  endTime: "10:00",
   name: "",
   phone: "",
   message: "",
 };
 
+const pad = (n: number) => String(n).padStart(2, "0");
+
+/** Today as an ISO yyyy-mm-dd string (for date input `min`). */
+function todayISO() {
+  const d = new Date();
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+/** Format a 24h "HH:MM" value as a friendly 12h string (e.g. "9:00 AM"). */
+function fmtTime(t: string) {
+  if (!t) return "";
+  const [h, m] = t.split(":").map(Number);
+  const ap = h >= 12 ? "PM" : "AM";
+  const h12 = h % 12 || 12;
+  return `${h12}:${pad(m)} ${ap}`;
+}
+
+const MINUTES = [0, 15, 30, 45];
+
+/**
+ * All selectable times as a single list — hours 1–12, minutes in 10-min steps,
+ * AM/PM. `value` is 24h "HH:MM", `label` is the friendly "9:00 AM" form.
+ */
+const TIME_OPTIONS = (() => {
+  const opts: { value: string; label: string }[] = [];
+  for (const ap of ["AM", "PM"]) {
+    for (const h12 of [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) {
+      for (const m of MINUTES) {
+        let h = h12 % 12;
+        if (ap === "PM") h += 12;
+        opts.push({ value: `${pad(h)}:${pad(m)}`, label: `${h12}:${pad(m)} ${ap}` });
+      }
+    }
+  }
+  return opts;
+})();
+
+/** Single-dropdown 12-hour time picker. */
+function TimeSelect({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  return (
+    <select
+      className="time-select"
+      aria-label="Time"
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    >
+      {TIME_OPTIONS.map((o) => (
+        <option key={o.value} value={o.value}>{o.label}</option>
+      ))}
+    </select>
+  );
+}
+
 export default function Contact() {
   const [form, setForm] = useState(initial);
   const [sent, setSent] = useState(false);
+  const today = todayISO();
+
+  const vehicle = fleet[Number(form.vehicleIdx)] ?? fleet[0];
 
   const set = (patch: Partial<typeof initial>) =>
     setForm((f) => ({ ...f, ...patch }));
@@ -32,6 +92,25 @@ export default function Contact() {
     (key: keyof typeof initial) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
       set({ [key]: e.target.value } as Partial<typeof initial>);
+
+  // Keep the end date on or after the start date.
+  const onStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const date = e.target.value;
+    setForm((f) => ({
+      ...f,
+      date,
+      endDate: f.endDate && f.endDate < date ? date : f.endDate,
+    }));
+  };
+
+  // Open the native picker whether the icon or the field body is clicked.
+  const openPicker = (e: React.MouseEvent<HTMLInputElement>) => {
+    try {
+      (e.currentTarget as HTMLInputElement & { showPicker?: () => void }).showPicker?.();
+    } catch {
+      /* not supported — the icon still works */
+    }
+  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -42,15 +121,26 @@ export default function Contact() {
       : isDays
       ? "Daily hire (as directed)"
       : "Transfer (distance)";
+    // Inclusive number of calendar days between start and end date.
+    const dayCount =
+      isDays && form.date && form.endDate
+        ? Math.max(
+            1,
+            Math.round(
+              (new Date(form.endDate).getTime() - new Date(form.date).getTime()) / 86_400_000
+            ) + 1
+          )
+        : 0;
     const lines = [
       `New booking request — ${company.name}`,
       `Trip type: ${tripLabel}`,
-      `Vehicle: ${form.vehicle}`,
+      `Vehicle: ${vehicle.name} (${vehicle.tier})`,
+      `Passengers: up to ${vehicle.seats}`,
       `Pickup: ${form.pickup}`,
       isHourly ? `Duration: ${form.hours} hour(s)` : `Drop-off: ${form.dropoff}`,
-      `${isDays ? "Start" : "Date"}: ${form.date}  Time: ${form.time}`,
-      isDays ? `End: ${form.endDate}  Time: ${form.endTime}` : "",
-      `Passengers: ${form.passengers}`,
+      `${isDays ? "Start" : "Date"}: ${form.date}  Time: ${fmtTime(form.time)}`,
+      isDays ? `End: ${form.endDate}  Time: ${fmtTime(form.endTime)}` : "",
+      isDays ? `Duration: ${dayCount} day(s)` : "",
       `Name: ${form.name}`,
       `Phone: ${form.phone}`,
       form.message ? `Notes: ${form.message}` : "",
@@ -115,6 +205,14 @@ export default function Contact() {
                 <span className="contact__row-value">{company.hours}</span>
               </span>
             </div>
+
+            <figure className="contact__vehicle">
+              <img src={vehicleImages[vehicle.image]} alt={vehicle.name} />
+              <figcaption>
+                <span className="contact__vehicle-tier">{vehicle.tier}</span>
+                <strong>{vehicle.name}</strong>
+              </figcaption>
+            </figure>
           </div>
 
           <div className="form reveal">
@@ -167,11 +265,13 @@ export default function Contact() {
 
                 <div className="field">
                   <label htmlFor="pickup">Pick-Up Location</label>
-                  <select id="pickup" value={form.pickup} onChange={update("pickup")}>
-                    {bookingLocations.map((o) => (
-                      <option key={o}>{o}</option>
-                    ))}
-                  </select>
+                  <input
+                    id="pickup"
+                    value={form.pickup}
+                    onChange={update("pickup")}
+                    placeholder="Enter pick-up location (e.g. CDG Airport, Terminal 2E)"
+                    required
+                  />
                 </div>
 
                 {form.tripType === "hourly" ? (
@@ -188,32 +288,59 @@ export default function Contact() {
                   </div>
                 ) : (
                   <div className="field">
-                    <label htmlFor="dropoff">Drop-Off Location</label>
-                    <select id="dropoff" value={form.dropoff} onChange={update("dropoff")}>
-                      {bookingLocations.map((o) => (
-                        <option key={o}>{o}</option>
-                      ))}
-                    </select>
+                    <label htmlFor="dropoff">Drop-Off / Destination</label>
+                    <input
+                      id="dropoff"
+                      value={form.dropoff}
+                      onChange={update("dropoff")}
+                      placeholder="Enter drop-off / destination (e.g. Paris, 8th arrondissement)"
+                      required
+                    />
                   </div>
                 )}
 
                 <div className="field">
                   <label htmlFor="vehicle">Vehicle Class</label>
-                  <select id="vehicle" value={form.vehicle} onChange={update("vehicle")}>
-                    {vehicleClasses.map((o) => (
-                      <option key={o}>{o}</option>
+                  <select id="vehicle" value={form.vehicleIdx} onChange={update("vehicleIdx")}>
+                    {fleet.map((v, i) => (
+                      <option key={v.name} value={i}>
+                        {v.name} — {v.tier}
+                      </option>
                     ))}
                   </select>
+                </div>
+
+                <div className="vehicle-summary">
+                  <span className="vehicle-summary__item">
+                    <Icon name="car" size={15} />
+                    <span className="vehicle-summary__val">{vehicle.tier}</span>
+                  </span>
+                  <span className="vehicle-summary__item">
+                    <Icon name="users" size={15} />
+                    <span className="vehicle-summary__val">Up to {vehicle.seats} pax</span>
+                  </span>
+                  <span className="vehicle-summary__item">
+                    <Icon name="luggage" size={15} />
+                    <span className="vehicle-summary__val">{vehicle.luggage} bags</span>
+                  </span>
                 </div>
 
                 <div className="form__row">
                   <div className="field">
                     <label htmlFor="date">{form.tripType === "days" ? "Start Date" : "Date"}</label>
-                    <input id="date" type="date" value={form.date} onChange={update("date")} required />
+                    <input
+                      id="date"
+                      type="date"
+                      min={today}
+                      value={form.date}
+                      onChange={onStartDate}
+                      onClick={openPicker}
+                      required
+                    />
                   </div>
                   <div className="field">
-                    <label htmlFor="time">{form.tripType === "days" ? "Start Time" : "Time"}</label>
-                    <input id="time" type="time" value={form.time} onChange={update("time")} required />
+                    <label>{form.tripType === "days" ? "Start Time" : "Time"}</label>
+                    <TimeSelect value={form.time} onChange={(v) => set({ time: v })} />
                   </div>
                 </div>
 
@@ -221,36 +348,32 @@ export default function Contact() {
                   <div className="form__row">
                     <div className="field">
                       <label htmlFor="endDate">End Date</label>
-                      <input id="endDate" type="date" value={form.endDate} onChange={update("endDate")} required />
+                      <input
+                        id="endDate"
+                        type="date"
+                        min={form.date || today}
+                        value={form.endDate}
+                        onChange={update("endDate")}
+                        onClick={openPicker}
+                        required
+                      />
                     </div>
                     <div className="field">
-                      <label htmlFor="endTime">End Time</label>
-                      <input id="endTime" type="time" value={form.endTime} onChange={update("endTime")} required />
+                      <label>End Time</label>
+                      <TimeSelect value={form.endTime} onChange={(v) => set({ endTime: v })} />
                     </div>
                   </div>
                 )}
 
                 <div className="form__row">
                   <div className="field">
-                    <label htmlFor="passengers">Passengers</label>
-                    <input
-                      id="passengers"
-                      type="number"
-                      min="1"
-                      max="7"
-                      value={form.passengers}
-                      onChange={update("passengers")}
-                    />
-                  </div>
-                  <div className="field">
                     <label htmlFor="name">Full Name</label>
                     <input id="name" required value={form.name} onChange={update("name")} placeholder="John Doe" />
                   </div>
-                </div>
-
-                <div className="field">
-                  <label htmlFor="phone">Phone</label>
-                  <input id="phone" required value={form.phone} onChange={update("phone")} placeholder="+33 ..." />
+                  <div className="field">
+                    <label htmlFor="phone">Phone</label>
+                    <input id="phone" required value={form.phone} onChange={update("phone")} placeholder="+33 ..." />
+                  </div>
                 </div>
 
                 <div className="field">
