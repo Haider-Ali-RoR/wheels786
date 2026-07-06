@@ -283,7 +283,7 @@ h1, h2, h3, h4 {
   inset: 0;
   background-size: cover;
   background-position: center;
-  filter: brightness(0.72) saturate(1.05);
+  filter: brightness(0.62) contrast(1.08) saturate(1.14);
   transform: scale(1);
 }
 .hero__overlay {
