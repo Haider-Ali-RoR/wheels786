@@ -949,10 +949,24 @@ h1, h2, h3, h4 {
 /* ============================================================
    Testimonials
    ============================================================ */
-.reviews__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.reviews__marquee {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.reviews__track {
+  display: flex;
   gap: 22px;
+  width: max-content;
+  animation: reviews-scroll 90s linear infinite;
+}
+.reviews__marquee:hover .reviews__track {
+  animation-play-state: paused;
+}
+@keyframes reviews-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 11px)); }
 }
 .review {
   background: var(--bg-card);
@@ -961,6 +975,12 @@ h1, h2, h3, h4 {
   padding: 30px 28px;
   display: flex;
   flex-direction: column;
+  flex: 0 0 auto;
+  width: min(360px, 82vw);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reviews__marquee { overflow-x: auto; }
+  .reviews__track { animation: none; }
 }
 .review__stars { color: #f5c518; letter-spacing: 2px; margin-bottom: 14px; }
 .review__text { color: var(--text); font-size: 0.98rem; flex: 1; }
