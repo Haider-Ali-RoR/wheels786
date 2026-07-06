@@ -9,6 +9,11 @@ export default function Hero() {
       <div className="hero__overlay" />
 
       <div className="container hero__inner">
+        <span className="hero__badge">
+          <span className="stars">★★★★★</span>
+          {company.rating} / 5 · {company.reviewCount}+ reviews
+        </span>
+
         <h1>
           Travel Paris in <span className="text-silver">Timeless Luxury</span>
         </h1>
@@ -17,11 +22,6 @@ export default function Hero() {
           Premium Mercedes-Benz chauffeur service. Fixed rates, professional
           drivers — available 24/7.
         </p>
-
-        <span className="hero__badge">
-          <span className="stars">★★★★★</span>
-          {company.rating} / 5 · {company.reviewCount}+ reviews
-        </span>
 
         <div className="hero__cta">
           <a href="#contact" className="btn btn--primary">

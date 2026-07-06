@@ -151,6 +151,16 @@ h1, h2, h3, h4 {
   background: rgba(255, 255, 255, 0.09);
   border-color: #3a3a44;
 }
+.hero__cta .btn--ghost {
+  background: rgba(8, 8, 10, 0.55);
+  border-color: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+}
+.hero__cta .btn--ghost:hover {
+  background: rgba(8, 8, 10, 0.72);
+  border-color: rgba(255, 255, 255, 0.3);
+}
 
 .btn--light {
   background: var(--silver-2);
@@ -287,7 +297,6 @@ h1, h2, h3, h4 {
 .hero__inner {
   position: relative;
   z-index: 2;
-  max-width: 680px;
   padding-top: 90px;
   padding-bottom: 60px;
 }
@@ -296,17 +305,20 @@ h1, h2, h3, h4 {
   align-items: center;
   gap: 10px;
   padding: 8px 16px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(8, 8, 10, 0.55);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
   border-radius: 999px;
   font-size: 0.82rem;
-  color: var(--text-dim);
+  color: var(--text);
   margin-bottom: 26px;
 }
 .hero__badge .stars { color: #f5c518; letter-spacing: 2px; }
 .hero h1 {
   font-size: clamp(2.4rem, 6vw, 4.4rem);
   margin-bottom: 22px;
+  max-width: 620px;
 }
 .hero p {
   font-size: 1.12rem;
@@ -1266,6 +1278,11 @@ h1, h2, h3, h4 {
   .modal__dialog { grid-template-columns: 1fr; max-height: 90vh; }
   .modal__media { min-height: 190px; max-height: 220px; border-radius: 18px 18px 0 0; }
   .modal__rates { border-radius: 0 0 18px 18px; }
+}
+@media (max-width: 640px) {
+  .hero__inner { text-align: center; }
+  .hero h1, .hero p { max-width: 100%; margin-left: auto; margin-right: auto; }
+  .hero__cta { justify-content: center; }
 }
 @media (max-width: 540px) {
   .form__row { grid-template-columns: 1fr; }
