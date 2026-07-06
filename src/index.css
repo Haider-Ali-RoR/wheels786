@@ -273,15 +273,15 @@ h1, h2, h3, h4 {
   inset: 0;
   background-size: cover;
   background-position: center;
-  filter: brightness(0.55) saturate(1.05);
-  transform: scale(1.05);
+  filter: brightness(0.72) saturate(1.05);
+  transform: scale(1);
 }
 .hero__overlay {
   position: absolute;
   inset: 0;
   background:
     radial-gradient(120% 80% at 20% 30%, rgba(192, 24, 42, 0.14), transparent 55%),
-    linear-gradient(90deg, rgba(8, 8, 10, 0.85) 0%, rgba(8, 8, 10, 0.5) 45%, rgba(8, 8, 10, 0.2) 100%),
+    linear-gradient(90deg, rgba(8, 8, 10, 0.72) 0%, rgba(8, 8, 10, 0.38) 45%, rgba(8, 8, 10, 0.12) 100%),
     linear-gradient(0deg, var(--bg) 2%, transparent 35%);
 }
 .hero__inner {
