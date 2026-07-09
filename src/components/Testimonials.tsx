@@ -1,15 +1,18 @@
-import { testimonials } from "../data/content";
+import { useContent, useT } from "../i18n/LanguageContext";
 
 export default function Testimonials() {
+  const { testimonials } = useContent();
+  const t = useT();
   return (
     <section id="reviews" className="section">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">Reviews</span>
+          <span className="eyebrow">{t.reviews.eyebrow}</span>
           <h2 className="section-title">
-            Trusted by <span className="text-silver">Travellers</span>
+            {t.reviews.titleLead}{" "}
+            <span className="text-silver">{t.reviews.titleAccent}</span>
           </h2>
-          <p className="section-sub">Rated 5/5 by thousands of passengers.</p>
+          <p className="section-sub">{t.reviews.sub}</p>
         </div>
 
         <div className="reviews__marquee reveal">

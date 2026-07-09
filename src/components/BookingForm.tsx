@@ -2,7 +2,9 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { Icon } from "./Icons";
-import { company, fleet } from "../data/content";
+import { company } from "../data/content";
+import type { Lang } from "../data/content";
+import { useContent, useLang, useT } from "../i18n/LanguageContext";
 import eclass from "../assets/mercedes-front.jpeg";
 import vclass from "../assets/vclass.jpeg";
 import sclass from "../assets/sclass.jpeg";
@@ -34,10 +36,14 @@ function todayISO() {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 }
 
-/** Format a 24h "HH:MM" value as a friendly 12h string (e.g. "9:00 AM"). */
-function fmtTime(t: string) {
+/**
+ * Format a 24h "HH:MM" value for display. English uses a 12h clock
+ * ("9:00 AM"); French uses the 24h clock ("09:00").
+ */
+function formatTime(t: string, lang: Lang) {
   if (!t) return "";
   const [h, m] = t.split(":").map(Number);
+  if (lang === "fr") return `${pad(h)}:${pad(m)}`;
   const ap = h >= 12 ? "PM" : "AM";
   const h12 = h % 12 || 12;
   return `${h12}:${pad(m)} ${ap}`;
@@ -45,41 +51,43 @@ function fmtTime(t: string) {
 
 const MINUTES = [0, 15, 30, 45];
 
-/**
- * All selectable times as a single list — hours 1–12, minutes in 10-min steps,
- * AM/PM. `value` is 24h "HH:MM", `label` is the friendly "9:00 AM" form.
- */
-const TIME_OPTIONS = (() => {
-  const opts: { value: string; label: string }[] = [];
+/** All selectable time values as 24h "HH:MM", in chronological order. */
+const TIME_VALUES = (() => {
+  const vals: string[] = [];
   for (const ap of ["AM", "PM"]) {
     for (const h12 of [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]) {
       for (const m of MINUTES) {
         let h = h12 % 12;
         if (ap === "PM") h += 12;
-        opts.push({ value: `${pad(h)}:${pad(m)}`, label: `${h12}:${pad(m)} ${ap}` });
+        vals.push(`${pad(h)}:${pad(m)}`);
       }
     }
   }
-  return opts;
+  return vals;
 })();
 
-/** Single-dropdown 12-hour time picker. */
+/** Single-dropdown time picker; labels follow the active language's clock. */
 function TimeSelect({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const { lang } = useLang();
+  const t = useT();
   return (
     <select
       className="time-select"
-      aria-label="Time"
+      aria-label={t.booking.timeAria}
       value={value}
       onChange={(e) => onChange(e.target.value)}
     >
-      {TIME_OPTIONS.map((o) => (
-        <option key={o.value} value={o.value}>{o.label}</option>
+      {TIME_VALUES.map((v) => (
+        <option key={v} value={v}>{formatTime(v, lang)}</option>
       ))}
     </select>
   );
 }
 
 export default function BookingForm() {
+  const { fleet, companyText } = useContent();
+  const { lang } = useLang();
+  const t = useT();
   const [form, setForm] = useState(initial);
   const [sent, setSent] = useState(false);
   const today = todayISO();
@@ -118,10 +126,10 @@ export default function BookingForm() {
     const isHourly = form.tripType === "hourly";
     const isDays = form.tripType === "days";
     const tripLabel = isHourly
-      ? "Hourly hire"
+      ? t.msg.tripHourly
       : isDays
-      ? "Daily hire (as directed)"
-      : "Transfer (distance)";
+      ? t.msg.tripDaily
+      : t.msg.tripDistance;
     // Inclusive number of calendar days between start and end date.
     const dayCount =
       isDays && form.date && form.endDate
@@ -133,18 +141,20 @@ export default function BookingForm() {
           )
         : 0;
     const lines = [
-      `New booking request — ${company.name}`,
-      `Trip type: ${tripLabel}`,
-      `Vehicle: ${vehicle.name} (${vehicle.tier})`,
-      `Passengers: up to ${vehicle.seats}`,
-      `Pickup: ${form.pickup}`,
-      isHourly ? `Duration: ${form.hours} hour(s)` : `Drop-off: ${form.dropoff}`,
-      `${isDays ? "Start" : "Date"}: ${form.date}  Time: ${fmtTime(form.time)}`,
-      isDays ? `End: ${form.endDate}  Time: ${fmtTime(form.endTime)}` : "",
-      isDays ? `Duration: ${dayCount} day(s)` : "",
-      `Name: ${form.name}`,
-      `Phone: ${form.phone}`,
-      form.message ? `Notes: ${form.message}` : "",
+      `${t.msg.heading} ${company.name}`,
+      `${t.msg.tripType}: ${tripLabel}`,
+      `${t.msg.vehicle}: ${vehicle.name} (${vehicle.tier})`,
+      `${t.msg.passengers} ${vehicle.seats}`,
+      `${t.msg.pickup}: ${form.pickup}`,
+      isHourly
+        ? `${t.msg.duration}: ${form.hours} ${t.msg.hoursUnit}`
+        : `${t.msg.dropoff}: ${form.dropoff}`,
+      `${isDays ? t.msg.start : t.msg.date}: ${form.date}  ${t.msg.timeLabel}: ${formatTime(form.time, lang)}`,
+      isDays ? `${t.msg.end}: ${form.endDate}  ${t.msg.timeLabel}: ${formatTime(form.endTime, lang)}` : "",
+      isDays ? `${t.msg.duration}: ${dayCount} ${t.msg.daysUnit}` : "",
+      `${t.msg.name}: ${form.name}`,
+      `${t.msg.phone}: ${form.phone}`,
+      form.message ? `${t.msg.notes}: ${form.message}` : "",
     ].filter(Boolean);
     const text = encodeURIComponent(lines.join("\n"));
     window.open(`https://wa.me/${company.whatsappRaw}?text=${text}`, "_blank");
@@ -156,15 +166,14 @@ export default function BookingForm() {
       <div className="container">
         <div className="section-head reveal">
           <Link to="/" className="back-link">
-            <Icon name="arrow" size={16} /> Back to home
+            <Icon name="arrow" size={16} /> {t.booking.back}
           </Link>
-          <span className="eyebrow">Book Your Ride</span>
+          <span className="eyebrow">{t.contact.eyebrow}</span>
           <h2 className="section-title">
-            Reserve in <span className="text-silver">Minutes</span>
+            {t.contact.titleLead}{" "}
+            <span className="text-silver">{t.contact.titleAccent}</span>
           </h2>
-          <p className="section-sub">
-            Tell us about your journey and get a fixed, all-inclusive quote — fast.
-          </p>
+          <p className="section-sub">{t.contact.sub}</p>
         </div>
 
         <div className="contact__grid">
@@ -174,7 +183,7 @@ export default function BookingForm() {
                 <Icon name="phone" size={20} />
               </span>
               <span>
-                <span className="contact__row-label">Call / WhatsApp</span>
+                <span className="contact__row-label">{t.contact.callLabel}</span>
                 <br />
                 <span className="contact__row-value">{company.phoneDisplay}</span>
               </span>
@@ -184,7 +193,7 @@ export default function BookingForm() {
                 <Icon name="mail" size={20} />
               </span>
               <span>
-                <span className="contact__row-label">Email</span>
+                <span className="contact__row-label">{t.contact.emailLabel}</span>
                 <br />
                 <span className="contact__row-value">{company.email}</span>
               </span>
@@ -194,7 +203,7 @@ export default function BookingForm() {
                 <Icon name="pin" size={20} />
               </span>
               <span>
-                <span className="contact__row-label">Address</span>
+                <span className="contact__row-label">{t.contact.addressLabel}</span>
                 <br />
                 <span className="contact__row-value">{company.address}</span>
               </span>
@@ -204,9 +213,9 @@ export default function BookingForm() {
                 <Icon name="clock" size={20} />
               </span>
               <span>
-                <span className="contact__row-label">Hours</span>
+                <span className="contact__row-label">{t.contact.hoursLabel}</span>
                 <br />
-                <span className="contact__row-value">{company.hours}</span>
+                <span className="contact__row-value">{companyText.hours}</span>
               </span>
             </div>
 
@@ -225,11 +234,8 @@ export default function BookingForm() {
                 <div className="form__success-icon">
                   <Icon name="check" size={32} />
                 </div>
-                <h3>Request Ready!</h3>
-                <p className="section-sub">
-                  Your booking details have opened in WhatsApp. Just hit send and
-                  we'll confirm your ride shortly.
-                </p>
+                <h3>{t.booking.successTitle}</h3>
+                <p className="section-sub">{t.booking.successText}</p>
                 <button
                   className="btn btn--ghost"
                   style={{ marginTop: 18 }}
@@ -238,7 +244,7 @@ export default function BookingForm() {
                     setSent(false);
                   }}
                 >
-                  New Request
+                  {t.booking.newRequest}
                 </button>
               </div>
             ) : (
@@ -249,38 +255,38 @@ export default function BookingForm() {
                     className={form.tripType === "distance" ? "active" : ""}
                     onClick={() => set({ tripType: "distance" })}
                   >
-                    <Icon name="pin" size={16} /> Distance
+                    <Icon name="pin" size={16} /> {t.booking.tripDistance}
                   </button>
                   <button
                     type="button"
                     className={form.tripType === "days" ? "active" : ""}
                     onClick={() => set({ tripType: "days" })}
                   >
-                    <Icon name="calendar" size={16} /> Days
+                    <Icon name="calendar" size={16} /> {t.booking.tripDays}
                   </button>
                   <button
                     type="button"
                     className={form.tripType === "hourly" ? "active" : ""}
                     onClick={() => set({ tripType: "hourly" })}
                   >
-                    <Icon name="clock" size={16} /> Hourly
+                    <Icon name="clock" size={16} /> {t.booking.tripHourly}
                   </button>
                 </div>
 
                 <div className="field">
-                  <label htmlFor="pickup">Pick-Up Location</label>
+                  <label htmlFor="pickup">{t.booking.pickupLabel}</label>
                   <input
                     id="pickup"
                     value={form.pickup}
                     onChange={update("pickup")}
-                    placeholder="Enter pick-up location (e.g. CDG Airport, Terminal 2E)"
+                    placeholder={t.booking.pickupPlaceholder}
                     required
                   />
                 </div>
 
                 {form.tripType === "hourly" ? (
                   <div className="field">
-                    <label htmlFor="hours">Duration (hours)</label>
+                    <label htmlFor="hours">{t.booking.durationLabel}</label>
                     <input
                       id="hours"
                       type="number"
@@ -292,19 +298,19 @@ export default function BookingForm() {
                   </div>
                 ) : (
                   <div className="field">
-                    <label htmlFor="dropoff">Drop-Off / Destination</label>
+                    <label htmlFor="dropoff">{t.booking.dropoffLabel}</label>
                     <input
                       id="dropoff"
                       value={form.dropoff}
                       onChange={update("dropoff")}
-                      placeholder="Enter drop-off / destination (e.g. Paris, 8th arrondissement)"
+                      placeholder={t.booking.dropoffPlaceholder}
                       required
                     />
                   </div>
                 )}
 
                 <div className="field">
-                  <label htmlFor="vehicle">Vehicle Class</label>
+                  <label htmlFor="vehicle">{t.booking.vehicleLabel}</label>
                   <select id="vehicle" value={form.vehicleIdx} onChange={update("vehicleIdx")}>
                     {fleet.map((v, i) => (
                       <option key={v.name} value={i}>
@@ -321,17 +327,21 @@ export default function BookingForm() {
                   </span>
                   <span className="vehicle-summary__item">
                     <Icon name="users" size={15} />
-                    <span className="vehicle-summary__val">Up to {vehicle.seats} pax</span>
+                    <span className="vehicle-summary__val">
+                      {t.booking.upTo} {vehicle.seats} {t.booking.paxUnit}
+                    </span>
                   </span>
                   <span className="vehicle-summary__item">
                     <Icon name="luggage" size={15} />
-                    <span className="vehicle-summary__val">{vehicle.luggage} bags</span>
+                    <span className="vehicle-summary__val">
+                      {vehicle.luggage} {t.booking.bagsUnit}
+                    </span>
                   </span>
                 </div>
 
                 <div className="form__row">
                   <div className="field">
-                    <label htmlFor="date">{form.tripType === "days" ? "Start Date" : "Date"}</label>
+                    <label htmlFor="date">{form.tripType === "days" ? t.booking.startDate : t.booking.date}</label>
                     <input
                       id="date"
                       type="date"
@@ -343,7 +353,7 @@ export default function BookingForm() {
                     />
                   </div>
                   <div className="field">
-                    <label>{form.tripType === "days" ? "Start Time" : "Time"}</label>
+                    <label>{form.tripType === "days" ? t.booking.startTime : t.booking.time}</label>
                     <TimeSelect value={form.time} onChange={(v) => set({ time: v })} />
                   </div>
                 </div>
@@ -351,7 +361,7 @@ export default function BookingForm() {
                 {form.tripType === "days" && (
                   <div className="form__row">
                     <div className="field">
-                      <label htmlFor="endDate">End Date</label>
+                      <label htmlFor="endDate">{t.booking.endDate}</label>
                       <input
                         id="endDate"
                         type="date"
@@ -363,7 +373,7 @@ export default function BookingForm() {
                       />
                     </div>
                     <div className="field">
-                      <label>End Time</label>
+                      <label>{t.booking.endTime}</label>
                       <TimeSelect value={form.endTime} onChange={(v) => set({ endTime: v })} />
                     </div>
                   </div>
@@ -371,31 +381,29 @@ export default function BookingForm() {
 
                 <div className="form__row">
                   <div className="field">
-                    <label htmlFor="name">Full Name</label>
-                    <input id="name" required value={form.name} onChange={update("name")} placeholder="John Doe" />
+                    <label htmlFor="name">{t.booking.fullName}</label>
+                    <input id="name" required value={form.name} onChange={update("name")} placeholder={t.booking.namePlaceholder} />
                   </div>
                   <div className="field">
-                    <label htmlFor="phone">Phone</label>
-                    <input id="phone" required value={form.phone} onChange={update("phone")} placeholder="+33 ..." />
+                    <label htmlFor="phone">{t.booking.phone}</label>
+                    <input id="phone" required value={form.phone} onChange={update("phone")} placeholder={t.booking.phonePlaceholder} />
                   </div>
                 </div>
 
                 <div className="field">
-                  <label htmlFor="message">Additional Notes</label>
+                  <label htmlFor="message">{t.booking.notes}</label>
                   <textarea
                     id="message"
                     value={form.message}
                     onChange={update("message")}
-                    placeholder="Flight number, luggage, child seat..."
+                    placeholder={t.booking.notesPlaceholder}
                   />
                 </div>
 
                 <button type="submit" className="btn btn--primary">
-                  <Icon name="whatsapp" size={20} /> Get My Quote
+                  <Icon name="whatsapp" size={20} /> {t.booking.submit}
                 </button>
-                <p className="form__note">
-                  Free quote · No payment required · 100% refund if cancelled 12h+ before pickup
-                </p>
+                <p className="form__note">{t.contact.note}</p>
               </form>
             )}
           </div>

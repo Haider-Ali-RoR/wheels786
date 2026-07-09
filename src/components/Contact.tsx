@@ -1,19 +1,21 @@
 import { Link } from "react-router-dom";
 import { Icon } from "./Icons";
 import { company } from "../data/content";
+import { useContent, useT } from "../i18n/LanguageContext";
 
 export default function Contact() {
+  const { companyText } = useContent();
+  const t = useT();
   return (
     <section id="contact" className="section section--alt">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">Book Your Ride</span>
+          <span className="eyebrow">{t.contact.eyebrow}</span>
           <h2 className="section-title">
-            Reserve in <span className="text-silver">Minutes</span>
+            {t.contact.titleLead}{" "}
+            <span className="text-silver">{t.contact.titleAccent}</span>
           </h2>
-          <p className="section-sub">
-            Tell us about your journey and get a fixed, all-inclusive quote — fast.
-          </p>
+          <p className="section-sub">{t.contact.sub}</p>
         </div>
 
         <div className="contact__grid">
@@ -23,7 +25,7 @@ export default function Contact() {
                 <Icon name="phone" size={20} />
               </span>
               <span>
-                <span className="contact__row-label">Call / WhatsApp</span>
+                <span className="contact__row-label">{t.contact.callLabel}</span>
                 <br />
                 <span className="contact__row-value">{company.phoneDisplay}</span>
               </span>
@@ -33,7 +35,7 @@ export default function Contact() {
                 <Icon name="mail" size={20} />
               </span>
               <span>
-                <span className="contact__row-label">Email</span>
+                <span className="contact__row-label">{t.contact.emailLabel}</span>
                 <br />
                 <span className="contact__row-value">{company.email}</span>
               </span>
@@ -43,7 +45,7 @@ export default function Contact() {
                 <Icon name="pin" size={20} />
               </span>
               <span>
-                <span className="contact__row-label">Address</span>
+                <span className="contact__row-label">{t.contact.addressLabel}</span>
                 <br />
                 <span className="contact__row-value">{company.address}</span>
               </span>
@@ -53,9 +55,9 @@ export default function Contact() {
                 <Icon name="clock" size={20} />
               </span>
               <span>
-                <span className="contact__row-label">Hours</span>
+                <span className="contact__row-label">{t.contact.hoursLabel}</span>
                 <br />
-                <span className="contact__row-value">{company.hours}</span>
+                <span className="contact__row-value">{companyText.hours}</span>
               </span>
             </div>
           </div>
@@ -64,18 +66,12 @@ export default function Contact() {
             <div className="contact__cta-icon">
               <Icon name="car" size={30} />
             </div>
-            <h3>Ready when you are</h3>
-            <p className="section-sub">
-              Get a fixed, all-inclusive quote in under a minute — no payment
-              required.
-            </p>
+            <h3>{t.contact.ctaTitle}</h3>
+            <p className="section-sub">{t.contact.ctaSub}</p>
             <Link to="/book" className="btn btn--primary">
-              <Icon name="arrow" size={18} /> Book Your Ride
+              <Icon name="arrow" size={18} /> {t.contact.ctaButton}
             </Link>
-            <p className="form__note">
-              Free quote · No payment required · 100% refund if cancelled 12h+
-              before pickup
-            </p>
+            <p className="form__note">{t.contact.note}</p>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
-import { stats } from "../data/content";
+import { useContent } from "../i18n/LanguageContext";
 
 export default function Stats() {
+  const { stats } = useContent();
   return (
     <div id="stats" className="container">
       <div className="stats reveal">

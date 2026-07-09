@@ -251,6 +251,34 @@ h1, h2, h3, h4 {
   padding: 8px;
 }
 
+/* Language switcher (FR / EN) */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px;
+  background: var(--bg-elev);
+}
+.lang-switch__btn {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 5px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.18s, background 0.18s;
+}
+.lang-switch__btn:hover { color: var(--text); }
+.lang-switch__btn.active {
+  color: #0a0a0c;
+  background: linear-gradient(180deg, var(--silver-2), #9a9aa2);
+}
+
 /* Mobile menu */
 .nav__mobile {
   display: none;

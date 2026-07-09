@@ -1,6 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { StaticRouter } from "react-router";
 import AppRoutes from "./AppRoutes";
+import { LanguageProvider } from "./i18n/LanguageProvider";
 
 /**
  * Server entry used only at build time by prerender.mjs.
@@ -10,9 +11,11 @@ import AppRoutes from "./AppRoutes";
  */
 export function render(url: string): string {
   return renderToStaticMarkup(
-    <StaticRouter location={url}>
-      <AppRoutes />
-    </StaticRouter>
+    <LanguageProvider>
+      <StaticRouter location={url}>
+        <AppRoutes />
+      </StaticRouter>
+    </LanguageProvider>
   );
 }
 

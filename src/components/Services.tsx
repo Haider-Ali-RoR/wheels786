@@ -1,16 +1,19 @@
 import { Icon } from "./Icons";
-import { services } from "../data/content";
+import { useContent, useT } from "../i18n/LanguageContext";
 
 export default function Services() {
+  const { services } = useContent();
+  const t = useT();
   return (
     <section id="services" className="section section--alt services">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">What We Offer</span>
+          <span className="eyebrow">{t.services.eyebrow}</span>
           <h2 className="section-title">
-            Our <span className="text-silver">Services</span>
+            {t.services.titleLead}{" "}
+            <span className="text-silver">{t.services.titleAccent}</span>
           </h2>
-          <p className="section-sub">Tailor-made travel, just for you.</p>
+          <p className="section-sub">{t.services.sub}</p>
         </div>
 
         <div className="services__grid">
@@ -23,7 +26,7 @@ export default function Services() {
               <h3>{s.title}</h3>
               <p>{s.text}</p>
               <span className="service-card__more">
-                Book this service <Icon name="arrow" size={16} />
+                {t.services.cardMore} <Icon name="arrow" size={16} />
               </span>
             </a>
           ))}

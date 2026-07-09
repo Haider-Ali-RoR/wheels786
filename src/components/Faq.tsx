@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { Icon } from "./Icons";
-import { faqs } from "../data/content";
+import { useContent, useT } from "../i18n/LanguageContext";
 
 export default function Faq() {
+  const { faqs } = useContent();
+  const t = useT();
   const [open, setOpen] = useState<number | null>(0);
 
   return (
     <section id="faq" className="section section--alt">
       <div className="container container--narrow">
         <div className="section-head reveal">
-          <span className="eyebrow">Good to Know</span>
+          <span className="eyebrow">{t.faq.eyebrow}</span>
           <h2 className="section-title">
-            Frequently Asked <span className="text-silver">Questions</span>
+            {t.faq.titleLead}{" "}
+            <span className="text-silver">{t.faq.titleAccent}</span>
           </h2>
         </div>
 

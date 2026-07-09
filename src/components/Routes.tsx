@@ -1,19 +1,19 @@
 import { Icon } from "./Icons";
-import { routes } from "../data/content";
+import { useContent, useT } from "../i18n/LanguageContext";
 
 export default function Routes() {
+  const { routes } = useContent();
+  const t = useT();
   return (
     <section id="pricing" className="section section--alt routes">
       <div className="container">
         <div className="section-head reveal">
-          <span className="eyebrow">Where We Travel</span>
+          <span className="eyebrow">{t.travelPoints.eyebrow}</span>
           <h2 className="section-title">
-            Popular <span className="text-silver">Travel Points</span>
+            {t.travelPoints.titleLead}{" "}
+            <span className="text-silver">{t.travelPoints.titleAccent}</span>
           </h2>
-          <p className="section-sub">
-            Door-to-door between Paris, the airports, and beyond. Contact us for
-            a tailored quote on any journey.
-          </p>
+          <p className="section-sub">{t.travelPoints.sub}</p>
         </div>
 
         <div className="routes__grid">
@@ -24,7 +24,7 @@ export default function Routes() {
             >
               {r.popular && (
                 <span className="route-card__flag">
-                  <Icon name="star" size={12} /> Most Popular
+                  <Icon name="star" size={12} /> {t.travelPoints.mostPopular}
                 </span>
               )}
 
@@ -34,7 +34,7 @@ export default function Routes() {
                     <Icon name="pin" size={13} />
                   </span>
                   <div className="route-card__place">
-                    <span className="route-card__label">From</span>
+                    <span className="route-card__label">{t.travelPoints.from}</span>
                     <span className="route-card__city">{r.from}</span>
                   </div>
                 </div>
@@ -46,7 +46,7 @@ export default function Routes() {
                     <Icon name="pin" size={13} />
                   </span>
                   <div className="route-card__place">
-                    <span className="route-card__label">To</span>
+                    <span className="route-card__label">{t.travelPoints.to}</span>
                     <span className="route-card__city">{r.to}</span>
                   </div>
                 </div>
@@ -57,7 +57,7 @@ export default function Routes() {
                   <Icon name="clock" size={14} /> {r.duration}
                 </span>
                 <a href="#contact" className="btn btn--primary route-card__btn">
-                  Enquire <Icon name="arrow" size={16} />
+                  {t.travelPoints.enquire} <Icon name="arrow" size={16} />
                 </a>
               </div>
             </article>
@@ -65,9 +65,8 @@ export default function Routes() {
         </div>
 
         <p className="routes__note reveal">
-          Every transfer is door-to-door with tolls, parking, and meet &amp;
-          greet included. Van (up to 7 pax) and S-Class also available.{" "}
-          <a href="#fleet">View all vehicles →</a>
+          {t.travelPoints.note}{" "}
+          <a href="#fleet">{t.travelPoints.viewAll}</a>
         </p>
       </div>
     </section>

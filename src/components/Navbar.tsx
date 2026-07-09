@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Icon } from "./Icons";
-import { company, navLinks } from "../data/content";
+import { company } from "../data/content";
+import { useContent, useLang, useT } from "../i18n/LanguageContext";
 import logo from "../assets/logo.jpeg";
 
 export default function Navbar() {
@@ -10,6 +11,9 @@ export default function Navbar() {
   const headerRef = useRef<HTMLElement>(null);
   const { pathname } = useLocation();
   const onHome = pathname === "/";
+  const { navLinks } = useContent();
+  const { lang, setLang } = useLang();
+  const t = useT();
 
   // On the home page, section links are in-page hashes (smooth scroll).
   // On other pages, prefix with "/" so they navigate home first, then anchor.
@@ -39,7 +43,7 @@ export default function Navbar() {
       <img src={logo} alt="786 Transport logo" className="nav__logo" />
       <span className="nav__brand-text">
         <span className="nav__brand-name">{company.name}</span>
-        <span className="nav__brand-tag">Paris · VTC</span>
+        <span className="nav__brand-tag">{t.nav.brandTag}</span>
       </span>
     </>
   );
@@ -68,16 +72,34 @@ export default function Navbar() {
         </nav>
 
         <div className="nav__actions">
+          <div className="lang-switch" role="group" aria-label={t.nav.language}>
+            <button
+              type="button"
+              className={`lang-switch__btn ${lang === "fr" ? "active" : ""}`}
+              aria-pressed={lang === "fr"}
+              onClick={() => setLang("fr")}
+            >
+              FR
+            </button>
+            <button
+              type="button"
+              className={`lang-switch__btn ${lang === "en" ? "active" : ""}`}
+              aria-pressed={lang === "en"}
+              onClick={() => setLang("en")}
+            >
+              EN
+            </button>
+          </div>
           <a href={`tel:${company.phoneRaw}`} className="nav__phone">
             <Icon name="phone" size={18} />
             {company.phoneDisplay}
           </a>
           <Link to="/book" className="btn btn--primary" onClick={() => setOpen(false)}>
-            Book Now
+            {t.nav.book}
           </Link>
           <button
             className="nav__toggle"
-            aria-label="Toggle menu"
+            aria-label={t.nav.toggleMenu}
             onClick={() => setOpen((v) => !v)}
           >
             <Icon name={open ? "close" : "menu"} size={26} />
@@ -92,7 +114,7 @@ export default function Navbar() {
           </a>
         ))}
         <Link to="/book" className="btn btn--primary" onClick={() => setOpen(false)}>
-          Book Now
+          {t.nav.book}
         </Link>
       </div>
     </header>

@@ -1,7 +1,10 @@
-import { company, navLinks, services } from "../data/content";
+import { company } from "../data/content";
+import { useContent, useT } from "../i18n/LanguageContext";
 import logo from "../assets/logo.jpeg";
 
 export default function Footer() {
+  const { navLinks, services, companyText } = useContent();
+  const t = useT();
   return (
     <footer className="footer">
       <div className="container">
@@ -11,11 +14,11 @@ export default function Footer() {
               <img src={logo} alt="786 Transport logo" />
               <strong>{company.name}</strong>
             </div>
-            <p className="footer__about">{company.description}</p>
+            <p className="footer__about">{companyText.description}</p>
           </div>
 
           <div className="footer__col">
-            <h4>Navigation</h4>
+            <h4>{t.footer.navigation}</h4>
             <ul>
               {navLinks.map((l) => (
                 <li key={l.href}>
@@ -26,7 +29,7 @@ export default function Footer() {
           </div>
 
           <div className="footer__col">
-            <h4>Services</h4>
+            <h4>{t.footer.services}</h4>
             <ul>
               {services.slice(0, 6).map((s) => (
                 <li key={s.title}>
@@ -37,7 +40,7 @@ export default function Footer() {
           </div>
 
           <div className="footer__col">
-            <h4>Contact</h4>
+            <h4>{t.footer.contact}</h4>
             <ul>
               <li>
                 <a href={`tel:${company.phoneRaw}`}>{company.phoneDisplay}</a>
@@ -46,17 +49,17 @@ export default function Footer() {
                 <a href={`mailto:${company.email}`}>{company.email}</a>
               </li>
               <li>{company.address}</li>
-              <li>{company.hours}</li>
+              <li>{companyText.hours}</li>
             </ul>
           </div>
         </div>
 
         <div className="footer__bottom">
           <span>
-            © 2024–2026 {company.name}. All rights reserved.
+            © 2024–2026 {company.name}. {t.footer.rights}
           </span>
           <span>
-            {company.legalName} · SIREN {company.siren} · VAT {company.vat}
+            {company.legalName} · {t.footer.siren} {company.siren} · {t.footer.vat} {company.vat}
           </span>
         </div>
       </div>

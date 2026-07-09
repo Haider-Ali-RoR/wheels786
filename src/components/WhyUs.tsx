@@ -1,23 +1,25 @@
 import { Icon } from "./Icons";
-import { features } from "../data/content";
+import { useContent, useT } from "../i18n/LanguageContext";
 import img from "../assets/mercedes-rear.jpeg";
 
 export default function WhyUs() {
+  const { features } = useContent();
+  const t = useT();
   return (
     <section id="why" className="section">
       <div className="container why__grid">
         <div className="why__media reveal">
-          <img src={img} alt="786 Transport Mercedes in Paris" />
+          <img src={img} alt={t.why.imgAlt} />
         </div>
 
         <div className="reveal">
-          <span className="eyebrow">Why Choose Us</span>
+          <span className="eyebrow">{t.why.eyebrow}</span>
           <h2 className="section-title">
-            The <span className="text-silver">786</span> Difference
+            {t.why.titleLead}{" "}
+            <span className="text-silver">{t.why.titleAccent}</span>
+            {t.why.titleTrail ? ` ${t.why.titleTrail}` : ""}
           </h2>
-          <p className="section-sub">
-            A premium fleet and customer-first service — every ride effortless.
-          </p>
+          <p className="section-sub">{t.why.sub}</p>
 
           <div className="why__list">
             {features.map((f) => (
