@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Icon } from "./Icons";
 import { company } from "../data/content";
 import heroImg from "../assets/hero-paris.jpeg";
@@ -24,9 +25,9 @@ export default function Hero() {
         </p>
 
         <div className="hero__cta">
-          <a href="#contact" className="btn btn--primary">
+          <Link to="/book" className="btn btn--primary">
             Get a Free Quote <Icon name="arrow" size={18} />
-          </a>
+          </Link>
           <a href={`tel:${company.phoneRaw}`} className="btn btn--ghost">
             <Icon name="phone" size={18} /> {company.phoneDisplay}
           </a>

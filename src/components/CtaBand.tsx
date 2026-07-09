@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Icon } from "./Icons";
 import { company } from "../data/content";
 
@@ -12,9 +13,9 @@ export default function CtaBand() {
           <p>Book your premium chauffeur in Paris — available 24/7.</p>
         </div>
         <div className="cta-band__actions reveal">
-          <a href="#contact" className="btn btn--primary">
+          <Link to="/book" className="btn btn--primary">
             Book Your Ride <Icon name="arrow" size={18} />
-          </a>
+          </Link>
           <a href={`tel:${company.phoneRaw}`} className="btn btn--light">
             <Icon name="phone" size={18} /> Call Now
           </a>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Icon } from "./Icons";
 import { company, navLinks } from "../data/content";
 import logo from "../assets/logo.jpeg";
@@ -7,6 +8,12 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
+  const { pathname } = useLocation();
+  const onHome = pathname === "/";
+
+  // On the home page, section links are in-page hashes (smooth scroll).
+  // On other pages, prefix with "/" so they navigate home first, then anchor.
+  const sectionHref = (href: string) => (onHome ? href : `/${href}`);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -27,22 +34,34 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", onDown);
   }, [open]);
 
+  const brandInner = (
+    <>
+      <img src={logo} alt="786 Transport logo" className="nav__logo" />
+      <span className="nav__brand-text">
+        <span className="nav__brand-name">{company.name}</span>
+        <span className="nav__brand-tag">Paris · VTC</span>
+      </span>
+    </>
+  );
+
   return (
     <header ref={headerRef} className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
       <div className="container nav__inner">
-        <a href="#home" className="nav__brand" onClick={() => setOpen(false)}>
-          <img src={logo} alt="786 Transport logo" className="nav__logo" />
-          <span className="nav__brand-text">
-            <span className="nav__brand-name">{company.name}</span>
-            <span className="nav__brand-tag">Paris · VTC</span>
-          </span>
-        </a>
+        {onHome ? (
+          <a href="#home" className="nav__brand" onClick={() => setOpen(false)}>
+            {brandInner}
+          </a>
+        ) : (
+          <Link to="/" className="nav__brand" onClick={() => setOpen(false)}>
+            {brandInner}
+          </Link>
+        )}
 
         <nav>
           <ul className="nav__links">
             {navLinks.map((l) => (
               <li key={l.href}>
-                <a href={l.href}>{l.label}</a>
+                <a href={sectionHref(l.href)}>{l.label}</a>
               </li>
             ))}
           </ul>
@@ -53,9 +72,9 @@ export default function Navbar() {
             <Icon name="phone" size={18} />
             {company.phoneDisplay}
           </a>
-          <a href="#contact" className="btn btn--primary">
+          <Link to="/book" className="btn btn--primary" onClick={() => setOpen(false)}>
             Book Now
-          </a>
+          </Link>
           <button
             className="nav__toggle"
             aria-label="Toggle menu"
@@ -68,10 +87,13 @@ export default function Navbar() {
 
       <div className={`nav__mobile ${open ? "open" : ""}`}>
         {navLinks.map((l) => (
-          <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+          <a key={l.href} href={sectionHref(l.href)} onClick={() => setOpen(false)}>
             {l.label}
           </a>
         ))}
+        <Link to="/book" className="btn btn--primary" onClick={() => setOpen(false)}>
+          Book Now
+        </Link>
       </div>
     </header>
   );
