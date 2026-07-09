@@ -54,7 +54,6 @@ export type ContentBundle = {
   features: { icon: string; title: string; text: string }[];
   stats: { value: string; label: string }[];
   routes: { from: string; to: string; duration: string; popular: boolean }[];
-  testimonials: { name: string; role: string; text: string; rating: number }[];
   coverage: string[];
   faqs: { q: string; a: string }[];
   bookingLocations: string[];
@@ -205,105 +204,6 @@ const en: ContentBundle = {
     { from: "Beauvais Airport", to: "Paris", duration: "~1h15", popular: false },
     { from: "Paris", to: "Disneyland Paris", duration: "~45 min", popular: false },
     { from: "Paris", to: "Reims", duration: "~1h45", popular: false },
-  ],
-
-  testimonials: [
-    {
-      name: "Sophie L.",
-      role: "Business Traveller",
-      text: "Always on time, spotless car, and a very professional driver. My go-to for airport transfers in Paris.",
-      rating: 5,
-    },
-    {
-      name: "James M.",
-      role: "Tourist · London",
-      text: "Booked a day tour of Paris. The chauffeur was friendly and knowledgeable. An unforgettable experience!",
-      rating: 5,
-    },
-    {
-      name: "Amélie R.",
-      role: "Corporate Client",
-      text: "We use 786 Transport for all our executive travel. Reliable, discreet, and consistently excellent service.",
-      rating: 5,
-    },
-    {
-      name: "Daniel K.",
-      role: "Frequent Flyer",
-      text: "My flight into CDG landed two hours late and the driver was still there waiting with a smile. No extra charge, no stress. That's rare these days.",
-      rating: 5,
-    },
-    {
-      name: "Isabella F.",
-      role: "Honeymoon · Milan",
-      text: "We hired the S-Class for an evening drive along the Seine. Champagne cold, car immaculate, driver so discreet. The highlight of our honeymoon.",
-      rating: 5,
-    },
-    {
-      name: "Thomas B.",
-      role: "Family Trip",
-      text: "Travelled to Disneyland with two small kids. Child seats were fitted and ready, and the V-Class swallowed all our luggage. Stress-free from door to door.",
-      rating: 5,
-    },
-    {
-      name: "Marta G.",
-      role: "Tourist · Madrid",
-      text: "Day trip to Versailles was flawless. Our driver dropped us right at the gates and picked us up exactly on time. Highly recommend for sightseeing.",
-      rating: 5,
-    },
-    {
-      name: "Oliver W.",
-      role: "Executive",
-      text: "Ran a two-day investor roadshow across Paris with 786. Punctual for every meeting and the car was a quiet place to take calls. Faultless.",
-      rating: 5,
-    },
-    {
-      name: "Yuki T.",
-      role: "Tourist · Tokyo",
-      text: "The driver spoke clearly, helped with our bags and even recommended a wonderful restaurant. We felt genuinely looked after in a new city.",
-      rating: 5,
-    },
-    {
-      name: "Claire D.",
-      role: "Wedding Client",
-      text: "Booked as our wedding car and it was pristine — ribbons, polished paint, the lot. Arrived early and the chauffeur was a true gentleman.",
-      rating: 5,
-    },
-    {
-      name: "Michael R.",
-      role: "Business Traveller",
-      text: "Orly to La Défense in the morning rush and I still made my 9am. The driver knew every shortcut. Booking took under a minute.",
-      rating: 5,
-    },
-    {
-      name: "Fatima A.",
-      role: "Group Travel · Dubai",
-      text: "Six of us plus a mountain of shopping — the V-Class handled it easily. Comfortable, cool and spotless. Will book again next trip.",
-      rating: 5,
-    },
-    {
-      name: "Lucas M.",
-      role: "Day Tour",
-      text: "Full-day excursion to the Champagne region. Our chauffeur was patient at every stop and got us home safely after the tastings. Brilliant day out.",
-      rating: 5,
-    },
-    {
-      name: "Emma S.",
-      role: "Solo Traveller",
-      text: "Late-night pickup from the airport and I felt completely safe the whole way. Tracked my ride, friendly driver, fair fixed price. Thank you!",
-      rating: 5,
-    },
-    {
-      name: "Andreas H.",
-      role: "Corporate · Frankfurt",
-      text: "We handle a lot of executive travel and 786 is now our Paris standard. Always punctual, clean invoicing, and the drivers are true professionals.",
-      rating: 4,
-    },
-    {
-      name: "Priya N.",
-      role: "Tourist · Mumbai",
-      text: "Spent the day shopping around the Champs-Élysées and the driver waited patiently at every store. Kind, professional and never rushed us.",
-      rating: 5,
-    },
   ],
 
   coverage: [
@@ -503,105 +403,6 @@ const fr: ContentBundle = {
     { from: "Paris", to: "Reims", duration: "~1h45", popular: false },
   ],
 
-  testimonials: [
-    {
-      name: "Sophie L.",
-      role: "Voyageuse d'affaires",
-      text: "Toujours à l'heure, voiture impeccable et chauffeur très professionnel. Ma référence pour les transferts aéroport à Paris.",
-      rating: 5,
-    },
-    {
-      name: "James M.",
-      role: "Touriste · Londres",
-      text: "J'ai réservé une visite de Paris à la journée. Le chauffeur était sympathique et très bien informé. Une expérience inoubliable !",
-      rating: 5,
-    },
-    {
-      name: "Amélie R.",
-      role: "Cliente entreprise",
-      text: "Nous faisons appel à 786 Transport pour tous nos déplacements professionnels. Fiable, discret et d'une qualité de service constante.",
-      rating: 5,
-    },
-    {
-      name: "Daniel K.",
-      role: "Grand voyageur",
-      text: "Mon vol à CDG a atterri avec deux heures de retard et le chauffeur était toujours là, à m'attendre avec le sourire. Aucun supplément, aucun stress. C'est rare de nos jours.",
-      rating: 5,
-    },
-    {
-      name: "Isabella F.",
-      role: "Lune de miel · Milan",
-      text: "Nous avons réservé la Classe S pour une balade le long de la Seine en soirée. Champagne au frais, voiture immaculée, chauffeur d'une grande discrétion. Le point d'orgue de notre lune de miel.",
-      rating: 5,
-    },
-    {
-      name: "Thomas B.",
-      role: "Voyage en famille",
-      text: "Trajet vers Disneyland avec deux jeunes enfants. Les sièges enfant étaient installés et prêts, et la Classe V a avalé tous nos bagages. Sans stress, de porte à porte.",
-      rating: 5,
-    },
-    {
-      name: "Marta G.",
-      role: "Touriste · Madrid",
-      text: "L'excursion à Versailles s'est déroulée sans le moindre accroc. Notre chauffeur nous a déposés juste devant les grilles et est revenu nous chercher à l'heure pile. Vivement recommandé pour les visites.",
-      rating: 5,
-    },
-    {
-      name: "Oliver W.",
-      role: "Cadre dirigeant",
-      text: "J'ai enchaîné deux jours de rendez-vous investisseurs dans tout Paris avec 786. Ponctuel à chaque réunion et la voiture était un endroit calme pour passer mes appels. Sans faute.",
-      rating: 5,
-    },
-    {
-      name: "Yuki T.",
-      role: "Touriste · Tokyo",
-      text: "Le chauffeur parlait clairement, nous a aidés avec nos bagages et nous a même recommandé un excellent restaurant. Nous nous sommes sentis vraiment bien pris en charge dans une ville inconnue.",
-      rating: 5,
-    },
-    {
-      name: "Claire D.",
-      role: "Cliente mariage",
-      text: "Réservée comme voiture de mariage, elle était irréprochable — rubans, carrosserie étincelante, tout y était. Arrivé en avance et le chauffeur, un vrai gentleman.",
-      rating: 5,
-    },
-    {
-      name: "Michael R.",
-      role: "Voyageur d'affaires",
-      text: "Orly – La Défense en pleine heure de pointe et j'étais quand même à l'heure pour mon rendez-vous de 9 h. Le chauffeur connaissait tous les raccourcis. Réservation faite en moins d'une minute.",
-      rating: 5,
-    },
-    {
-      name: "Fatima A.",
-      role: "Voyage en groupe · Dubaï",
-      text: "Six personnes et une montagne d'achats — la Classe V a tout géré sans problème. Confortable, climatisée et impeccable. Je réserverai à nouveau au prochain voyage.",
-      rating: 5,
-    },
-    {
-      name: "Lucas M.",
-      role: "Excursion",
-      text: "Excursion d'une journée en Champagne. Notre chauffeur a été patient à chaque étape et nous a ramenés en toute sécurité après les dégustations. Une superbe journée.",
-      rating: 5,
-    },
-    {
-      name: "Emma S.",
-      role: "Voyageuse en solo",
-      text: "Prise en charge tard le soir à l'aéroport et je me suis sentie parfaitement en sécurité tout le long. Trajet suivi, chauffeur sympathique, tarif fixe et honnête. Merci !",
-      rating: 5,
-    },
-    {
-      name: "Andreas H.",
-      role: "Entreprise · Francfort",
-      text: "Nous gérons beaucoup de déplacements professionnels et 786 est désormais notre référence à Paris. Toujours ponctuel, facturation claire et des chauffeurs vraiment professionnels.",
-      rating: 4,
-    },
-    {
-      name: "Priya N.",
-      role: "Touriste · Bombay",
-      text: "J'ai passé la journée à faire du shopping autour des Champs-Élysées et le chauffeur a attendu patiemment devant chaque boutique. Aimable, professionnel et jamais pressé.",
-      rating: 5,
-    },
-  ],
-
   coverage: [
     "Paris (tous les arrondissements)",
     "Charles de Gaulle (CDG)",
@@ -651,6 +452,116 @@ const fr: ContentBundle = {
     "Autre (préciser dans les notes)",
   ],
 };
+
+/**
+ * Customer reviews are intentionally NOT translated: 786 Transport serves both
+ * French- and English-speaking clients, so the testimonial wall shows a mix of
+ * both languages in each review's original wording, identically regardless of
+ * the site's selected language.
+ */
+export const testimonials: {
+  name: string;
+  role: string;
+  text: string;
+  rating: number;
+}[] = [
+  {
+    name: "Sophie L.",
+    role: "Voyageuse d'affaires",
+    text: "Toujours à l'heure, voiture impeccable et chauffeur très professionnel. Ma référence pour les transferts aéroport à Paris.",
+    rating: 5,
+  },
+  {
+    name: "James M.",
+    role: "Tourist · London",
+    text: "Booked a day tour of Paris. The chauffeur was friendly and knowledgeable. An unforgettable experience!",
+    rating: 5,
+  },
+  {
+    name: "Amélie R.",
+    role: "Cliente entreprise",
+    text: "Nous faisons appel à 786 Transport pour tous nos déplacements professionnels. Fiable, discret et d'une qualité de service constante.",
+    rating: 5,
+  },
+  {
+    name: "Daniel K.",
+    role: "Frequent Flyer",
+    text: "My flight into CDG landed two hours late and the driver was still there waiting with a smile. No extra charge, no stress. That's rare these days.",
+    rating: 5,
+  },
+  {
+    name: "Isabella F.",
+    role: "Honeymoon · Milan",
+    text: "We hired the S-Class for an evening drive along the Seine. Champagne cold, car immaculate, driver so discreet. The highlight of our honeymoon.",
+    rating: 5,
+  },
+  {
+    name: "Thomas B.",
+    role: "Voyage en famille",
+    text: "Trajet vers Disneyland avec deux jeunes enfants. Les sièges enfant étaient installés et prêts, et la Classe V a avalé tous nos bagages. Sans stress, de porte à porte.",
+    rating: 5,
+  },
+  {
+    name: "Marta G.",
+    role: "Tourist · Madrid",
+    text: "Day trip to Versailles was flawless. Our driver dropped us right at the gates and picked us up exactly on time. Highly recommend for sightseeing.",
+    rating: 5,
+  },
+  {
+    name: "Claire D.",
+    role: "Cliente mariage",
+    text: "Réservée comme voiture de mariage, elle était irréprochable — rubans, carrosserie étincelante, tout y était. Arrivé en avance et le chauffeur, un vrai gentleman.",
+    rating: 5,
+  },
+  {
+    name: "Yuki T.",
+    role: "Tourist · Tokyo",
+    text: "The driver spoke clearly, helped with our bags and even recommended a wonderful restaurant. We felt genuinely looked after in a new city.",
+    rating: 5,
+  },
+  {
+    name: "Fatima A.",
+    role: "Voyage en groupe · Dubaï",
+    text: "Six personnes et une montagne d'achats — la Classe V a tout géré sans problème. Confortable, climatisée et impeccable. Je réserverai à nouveau au prochain voyage.",
+    rating: 5,
+  },
+  {
+    name: "Michael R.",
+    role: "Business Traveller",
+    text: "Orly to La Défense in the morning rush and I still made my 9am. The driver knew every shortcut. Booking took under a minute.",
+    rating: 5,
+  },
+  {
+    name: "Lucas M.",
+    role: "Excursion",
+    text: "Excursion d'une journée en Champagne. Notre chauffeur a été patient à chaque étape et nous a ramenés en toute sécurité après les dégustations. Une superbe journée.",
+    rating: 5,
+  },
+  {
+    name: "Andreas H.",
+    role: "Corporate · Frankfurt",
+    text: "We handle a lot of executive travel and 786 is now our Paris standard. Always punctual, clean invoicing, and the drivers are true professionals.",
+    rating: 4,
+  },
+  {
+    name: "Emma S.",
+    role: "Voyageuse en solo",
+    text: "Prise en charge tard le soir à l'aéroport et je me suis sentie parfaitement en sécurité tout le long. Trajet suivi, chauffeur sympathique, tarif fixe et honnête. Merci !",
+    rating: 5,
+  },
+  {
+    name: "Oliver W.",
+    role: "Executive",
+    text: "Ran a two-day investor roadshow across Paris with 786. Punctual for every meeting and the car was a quiet place to take calls. Faultless.",
+    rating: 5,
+  },
+  {
+    name: "Priya N.",
+    role: "Touriste · Bombay",
+    text: "J'ai passé la journée à faire du shopping autour des Champs-Élysées et le chauffeur a attendu patiemment devant chaque boutique. Aimable, professionnel et jamais pressé.",
+    rating: 5,
+  },
+];
 
 /** All locale bundles, keyed by language code. */
 export const content: Record<Lang, ContentBundle> = { en, fr };

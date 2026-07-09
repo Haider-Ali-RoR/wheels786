@@ -1,7 +1,7 @@
-import { useContent, useT } from "../i18n/LanguageContext";
+import { testimonials } from "../data/content";
+import { useT } from "../i18n/LanguageContext";
 
 export default function Testimonials() {
-  const { testimonials } = useContent();
   const t = useT();
   return (
     <section id="reviews" className="section">

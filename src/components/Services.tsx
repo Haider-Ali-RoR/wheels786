@@ -18,7 +18,7 @@ export default function Services() {
 
         <div className="services__grid">
           {services.map((s, i) => (
-            <a href="#contact" className="service-card reveal" key={s.title}>
+            <a href="#contact" className="service-card reveal" key={s.icon}>
               <span className="service-card__num">{String(i + 1).padStart(2, "0")}</span>
               <span className="service-card__icon">
                 <Icon name={s.icon} size={26} />

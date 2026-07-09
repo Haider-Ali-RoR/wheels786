@@ -45,7 +45,7 @@ export default function Fleet() {
             <button
               type="button"
               className="fleet-card reveal"
-              key={v.name}
+              key={v.image}
               onClick={() => setActive(v)}
             >
               <div className="fleet-card__media">

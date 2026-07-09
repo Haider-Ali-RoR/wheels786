@@ -17,10 +17,10 @@ export default function Routes() {
         </div>
 
         <div className="routes__grid">
-          {routes.map((r) => (
+          {routes.map((r, i) => (
             <article
               className={`route-card reveal ${r.popular ? "route-card--popular" : ""}`}
-              key={`${r.from}-${r.to}`}
+              key={i}
             >
               {r.popular && (
                 <span className="route-card__flag">
