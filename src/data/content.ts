@@ -17,7 +17,7 @@ export const company = {
   email: "786transport.rs@gmail.com",
   address: "5 Cité de la Courtille — Rue des Maraudes, 93200 Saint-Denis, France",
   rating: 4.7,
-  reviewCount: "13K",
+  reviewCount: "23K",
   hours: "24/7 — 7 days a week",
   // --- Legal (SAS) ---
   legalName: "786 Transport SAS",
@@ -148,7 +148,7 @@ export const features = [
 
 export const stats = [
   { value: "10+", label: "Years Experience" },
-  { value: "15K+", label: "Rides Completed" },
+  { value: "25K+", label: "Rides Completed" },
   { value: "4.7★", label: "Average Rating" },
   { value: "24/7", label: "Availability" },
 ];
