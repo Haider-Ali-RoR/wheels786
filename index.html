@@ -1,7 +1,15 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" translate="no">
   <head>
     <meta charset="UTF-8" />
+    <!--
+      This site ships its own FR/EN switcher, so browser auto-translation is
+      redundant AND breaks React: it wraps React-managed text nodes in <font>
+      tags, and a subsequent in-app language switch then crashes with
+      "removeChild: The node to be removed is not a child of this node".
+      Opt the page out of Chrome/Google translation entirely.
+    -->
+    <meta name="google" content="notranslate" />
     <link rel="icon" type="image/jpeg" href="/favicon.jpeg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
