@@ -112,3 +112,31 @@ Recommended in order of impact for a local Paris VTC business:
 4. **Bing Webmaster Tools** — [bing.com/webmasters](https://www.bing.com/webmasters),
    "Import from Google Search Console" (one click). Also feeds Copilot/ChatGPT search.
 5. **Google Analytics 4** — optional, to measure incoming traffic.
+
+---
+
+## All links used in this setup
+
+Every site/URL referenced or visited during the process, grouped by purpose:
+
+### Google Search Console (verification, sitemap, indexing)
+- Search Console — https://search.google.com/search-console
+
+### DNS / domain
+- ICANN registrar lookup (used to identify the DNS host) — https://lookup.icann.org
+- Spaceship (domain + DNS host) — https://www.spaceship.com
+- Spaceship domain list / DNS manager — https://www.spaceship.com/application/domain-list/
+
+### Live site assets (verified during setup)
+- Homepage — https://privatedriverparis-786transport.com/
+- robots.txt — https://privatedriverparis-786transport.com/robots.txt
+- sitemap.xml — https://privatedriverparis-786transport.com/sitemap.xml
+
+### Validation tools (for next steps)
+- Google Rich Results Test (structured data) — https://search.google.com/test/rich-results
+- Facebook Sharing Debugger (Open Graph preview) — https://developers.facebook.com/tools/debug/
+- X (Twitter) Card Validator — https://cards-dev.twitter.com/validator
+
+### Other platforms (next steps)
+- Google Business Profile — https://business.google.com
+- Bing Webmaster Tools — https://www.bing.com/webmasters
