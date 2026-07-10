@@ -168,7 +168,7 @@ const en: ContentBundle = {
     {
       icon: "check",
       title: "Flexible Cancellation",
-      text: "Cancel at least 12 hours before pickup and get a 100% refund. Cancellations made within 12 hours of pickup are non-refundable.",
+      text: "Cancel at least 48 hours before pickup and get a 100% refund. Cancellations made within 48 hours of pickup are non-refundable.",
     },
     {
       icon: "shield",
@@ -240,7 +240,7 @@ const en: ContentBundle = {
     },
     {
       q: "How do I pay, and can I cancel?",
-      a: "We accept card and cash. Cancel at least 12 hours before pickup for a 100% refund; cancellations made within 12 hours of pickup are non-refundable.",
+      a: "We accept card and cash. Cancel at least 48 hours before pickup for a 100% refund; cancellations made within 48 hours of pickup are non-refundable.",
     },
   ],
 
@@ -365,7 +365,7 @@ const fr: ContentBundle = {
     {
       icon: "check",
       title: "Annulation flexible",
-      text: "Annulez au moins 12 heures avant la prise en charge pour un remboursement à 100 %. Les annulations dans les 12 heures précédant la prise en charge ne sont pas remboursables.",
+      text: "Annulez au moins 48 heures avant la prise en charge pour un remboursement à 100 %. Les annulations dans les 48 heures précédant la prise en charge ne sont pas remboursables.",
     },
     {
       icon: "shield",
@@ -437,7 +437,7 @@ const fr: ContentBundle = {
     },
     {
       q: "Comment payer, et puis-je annuler ?",
-      a: "Nous acceptons la carte et les espèces. Annulez au moins 12 heures avant la prise en charge pour un remboursement à 100 % ; les annulations dans les 12 heures précédant la prise en charge ne sont pas remboursables.",
+      a: "Nous acceptons la carte et les espèces. Annulez au moins 48 heures avant la prise en charge pour un remboursement à 100 % ; les annulations dans les 48 heures précédant la prise en charge ne sont pas remboursables.",
     },
   ],
 
