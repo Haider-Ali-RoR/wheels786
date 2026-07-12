@@ -929,6 +929,122 @@ h1, h2, h3, h4 {
 .routes__note a { color: var(--red-bright); font-weight: 600; }
 
 /* ============================================================
+   FIXED RATES
+   ============================================================ */
+.rates__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.rate-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px 30px 26px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.rate-card:hover {
+  transform: translateY(-6px);
+  border-color: #3a3a44;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+}
+.rate-card--popular {
+  border-color: rgba(226, 48, 66, 0.4);
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgba(226, 48, 66, 0.09), transparent 55%),
+    var(--bg-card);
+}
+.rate-card__badge {
+  position: absolute;
+  top: -11px;
+  left: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--red-grad);
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(192, 24, 42, 0.4);
+}
+.rate-card__route {
+  display: flex;
+  flex-direction: column;
+}
+.rate-card__stop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.rate-card__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  color: var(--silver);
+}
+.rate-card__city {
+  font-weight: 600;
+  font-size: 1.06rem;
+}
+.rate-card__line {
+  width: 2px;
+  height: 20px;
+  margin: 3px 0 3px 10px;
+  background: repeating-linear-gradient(180deg, var(--line) 0 5px, transparent 5px 10px);
+}
+.rate-card__foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 22px;
+}
+.rate-card__pricing {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.rate-card__from {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-bottom: 10px;
+}
+.rate-card__price {
+  display: inline-flex;
+  align-items: baseline;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--silver-2);
+  letter-spacing: -0.01em;
+}
+.rate-card__cur {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin-left: 2px;
+}
+.rate-card__book { padding: 11px 20px; font-size: 0.85rem; }
+.rate-card__vehicle {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+/* ============================================================
    FAQ
    ============================================================ */
 .faq { display: grid; gap: 12px; }
@@ -1346,6 +1462,7 @@ h1, h2, h3, h4 {
   .page-book .contact__info { order: 2; }
   .coverage__grid { grid-template-columns: repeat(2, 1fr); }
   .routes__grid { grid-template-columns: repeat(2, 1fr); }
+  .rates__grid { grid-template-columns: repeat(2, 1fr); }
   .services__grid, .fleet__grid { grid-template-columns: repeat(2, 1fr); }
   .footer__top { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
@@ -1359,6 +1476,7 @@ h1, h2, h3, h4 {
 }
 @media (max-width: 760px) {
   .routes__grid { grid-template-columns: 1fr; }
+  .rates__grid { grid-template-columns: 1fr; }
   .cta-band__inner { flex-direction: column; text-align: center; }
   .cta-band__actions { justify-content: center; }
 }

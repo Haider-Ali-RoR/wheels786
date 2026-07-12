@@ -54,6 +54,14 @@ export type ContentBundle = {
   features: { icon: string; title: string; text: string }[];
   stats: { value: string; label: string }[];
   routes: { from: string; to: string; duration: string; popular: boolean }[];
+  fixedRates: {
+    from: string;
+    to: string;
+    fromIcon: "plane" | "pin";
+    toIcon: "plane" | "pin";
+    price: number;
+    popular: boolean;
+  }[];
   coverage: string[];
   faqs: { q: string; a: string }[];
   bookingLocations: string[];
@@ -204,6 +212,15 @@ const en: ContentBundle = {
     { from: "Beauvais Airport", to: "Paris", duration: "~1h15", popular: false },
     { from: "Paris", to: "Disneyland Paris", duration: "~45 min", popular: false },
     { from: "Paris", to: "Reims", duration: "~1h45", popular: false },
+  ],
+
+  fixedRates: [
+    { from: "CDG Airport", to: "Paris City", fromIcon: "plane", toIcon: "pin", price: 110, popular: true },
+    { from: "Orly Airport", to: "Paris City", fromIcon: "plane", toIcon: "pin", price: 90, popular: false },
+    { from: "CDG Airport", to: "Disneyland Paris", fromIcon: "plane", toIcon: "pin", price: 110, popular: false },
+    { from: "CDG Airport", to: "Versailles", fromIcon: "plane", toIcon: "pin", price: 140, popular: false },
+    { from: "Orly Airport", to: "Disneyland Paris", fromIcon: "plane", toIcon: "pin", price: 120, popular: false },
+    { from: "Paris City", to: "Versailles", fromIcon: "pin", toIcon: "pin", price: 110, popular: false },
   ],
 
   coverage: [
@@ -401,6 +418,15 @@ const fr: ContentBundle = {
     { from: "Aéroport de Beauvais", to: "Paris", duration: "~1h15", popular: false },
     { from: "Paris", to: "Disneyland Paris", duration: "~45 min", popular: false },
     { from: "Paris", to: "Reims", duration: "~1h45", popular: false },
+  ],
+
+  fixedRates: [
+    { from: "Aéroport CDG", to: "Paris centre", fromIcon: "plane", toIcon: "pin", price: 110, popular: true },
+    { from: "Aéroport d'Orly", to: "Paris centre", fromIcon: "plane", toIcon: "pin", price: 90, popular: false },
+    { from: "Aéroport CDG", to: "Disneyland Paris", fromIcon: "plane", toIcon: "pin", price: 110, popular: false },
+    { from: "Aéroport CDG", to: "Versailles", fromIcon: "plane", toIcon: "pin", price: 140, popular: false },
+    { from: "Aéroport d'Orly", to: "Disneyland Paris", fromIcon: "plane", toIcon: "pin", price: 120, popular: false },
+    { from: "Paris centre", to: "Versailles", fromIcon: "pin", toIcon: "pin", price: 110, popular: false },
   ],
 
   coverage: [

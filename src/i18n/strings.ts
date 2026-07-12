@@ -50,6 +50,16 @@ const fr = {
     luggage: "Bagages",
     enquire: "Se renseigner sur cette classe",
   },
+  fixedRates: {
+    eyebrow: "Tarifs fixes",
+    titleLead: "Tarifs fixes —",
+    titleAccent: "sans surprise",
+    sub: "Des prix tout compris. Pas de compteur, pas de majoration, aucuns frais cachés.",
+    from: "À partir de",
+    book: "Réserver",
+    mostPopular: "Le plus demandé",
+    vehicleNote: "Mercedes Classe E · 1–4 pax",
+  },
   why: {
     eyebrow: "Pourquoi nous choisir",
     titleLead: "La différence",
@@ -206,6 +216,16 @@ const en: UIStrings = {
     passengers: "Passengers",
     luggage: "Luggage",
     enquire: "Enquire About This Class",
+  },
+  fixedRates: {
+    eyebrow: "Fixed Pricing",
+    titleLead: "Fixed Rates —",
+    titleAccent: "No Surprises",
+    sub: "All-inclusive prices. No meters, no surge pricing, no hidden fees.",
+    from: "From",
+    book: "Book",
+    mostPopular: "Most Popular",
+    vehicleNote: "Mercedes E-Class · 1–4 pax",
   },
   why: {
     eyebrow: "Why Choose Us",

@@ -3,6 +3,7 @@ import Hero from "./components/Hero";
 import Stats from "./components/Stats";
 import Services from "./components/Services";
 import Fleet from "./components/Fleet";
+import FixedRates from "./components/FixedRates";
 import WhyUs from "./components/WhyUs";
 import Testimonials from "./components/Testimonials";
 import Faq from "./components/Faq";
@@ -22,6 +23,7 @@ export default function App() {
         <Hero />
         <Stats />
         <Fleet />
+        <FixedRates />
         <Testimonials />
         <Services />
         <WhyUs />
