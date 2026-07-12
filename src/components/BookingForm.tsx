@@ -5,11 +5,12 @@ import { Icon } from "./Icons";
 import { company } from "../data/content";
 import type { Lang } from "../data/content";
 import { useContent, useLang, useT } from "../i18n/LanguageContext";
+import cclass from "../assets/cclass.jpeg";
 import eclass from "../assets/mercedes-front.jpeg";
 import vclass from "../assets/vclass.jpeg";
 import sclass from "../assets/sclass.jpeg";
 
-const vehicleImages: Record<string, string> = { eclass, vclass, sclass };
+const vehicleImages: Record<string, string> = { cclass, eclass, vclass, sclass };
 
 type TripType = "distance" | "days" | "hourly";
 

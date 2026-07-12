@@ -3,11 +3,12 @@ import { createPortal } from "react-dom";
 import { Icon } from "./Icons";
 import { useContent, useT } from "../i18n/LanguageContext";
 import type { ContentBundle } from "../data/content";
+import cclass from "../assets/cclass.jpeg";
 import eclass from "../assets/mercedes-front.jpeg";
 import vclass from "../assets/vclass.jpeg";
 import sclass from "../assets/sclass.jpeg";
 
-const images: Record<string, string> = { eclass, vclass, sclass };
+const images: Record<string, string> = { cclass, eclass, vclass, sclass };
 
 type Vehicle = ContentBundle["fleet"][number];
 

@@ -516,17 +516,17 @@ h1, h2, h3, h4 {
    Fleet
    ============================================================ */
 .fleet__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 24px;
-  align-items: stretch;
 }
 .fleet-card {
   appearance: none;
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  flex: 0 1 calc((100% - 48px) / 3);
   padding: 0;
   text-align: left;
   font: inherit;
@@ -1483,7 +1483,8 @@ h1, h2, h3, h4 {
   .coverage__grid { grid-template-columns: repeat(2, 1fr); }
   .routes__grid { grid-template-columns: repeat(2, 1fr); }
   .rates__grid { grid-template-columns: repeat(2, 1fr); }
-  .services__grid, .fleet__grid { grid-template-columns: repeat(2, 1fr); }
+  .services__grid { grid-template-columns: repeat(2, 1fr); }
+  .fleet-card { flex-basis: calc((100% - 24px) / 2); }
   .footer__top { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
 @media (max-width: 820px) {
@@ -1517,7 +1518,8 @@ h1, h2, h3, h4 {
   .form__row { grid-template-columns: 1fr; }
   .coverage__grid { grid-template-columns: 1fr; }
   .routes__grid { grid-template-columns: 1fr; }
-  .services__grid, .fleet__grid { grid-template-columns: 1fr; }
+  .services__grid { grid-template-columns: 1fr; }
+  .fleet-card { flex-basis: 100%; }
   .footer__top { grid-template-columns: 1fr; }
   .hero__cta { width: 100%; }
   .hero__cta .btn { flex: 1; justify-content: center; }
