@@ -641,8 +641,8 @@ h1, h2, h3, h4 {
 .modal__dialog {
   position: relative;
   width: 100%;
-  max-width: 900px;
-  max-height: 92vh;
+  max-width: 1080px;
+  max-height: 94vh;
   display: grid;
   grid-template-columns: 1.05fr 1fr;
   background: var(--bg-card);
@@ -669,9 +669,29 @@ h1, h2, h3, h4 {
   transition: background 0.18s, transform 0.18s;
 }
 .modal__close:hover { background: var(--red); transform: rotate(90deg); }
+.modal__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
+  transform: translateY(-50%);
+  transition: background 0.18s, transform 0.18s;
+}
+.modal__nav:hover { background: var(--red); transform: translateY(-50%) scale(1.08); }
+.modal__nav--prev { left: -23px; }
+.modal__nav--next { right: -23px; }
+.modal__nav--prev svg { transform: rotate(180deg); }
 .modal__media {
   position: relative;
-  min-height: 380px;
+  min-height: 480px;
   overflow: hidden;
   border-radius: 18px 0 0 18px;
 }
@@ -1482,8 +1502,11 @@ h1, h2, h3, h4 {
 }
 @media (max-width: 720px) {
   .modal__dialog { grid-template-columns: 1fr; max-height: 90vh; }
-  .modal__media { min-height: 190px; max-height: 220px; border-radius: 18px 18px 0 0; }
+  .modal__media { min-height: 220px; max-height: 240px; border-radius: 18px 18px 0 0; }
   .modal__rates { border-radius: 0 0 18px 18px; }
+  .modal__nav { width: 40px; height: 40px; top: 118px; }
+  .modal__nav--prev { left: 10px; }
+  .modal__nav--next { right: 10px; }
 }
 @media (max-width: 640px) {
   .hero__inner { text-align: center; }

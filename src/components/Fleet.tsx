@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Icon } from "./Icons";
 import { useContent, useT } from "../i18n/LanguageContext";
@@ -14,19 +14,33 @@ type Vehicle = ContentBundle["fleet"][number];
 export default function Fleet() {
   const { fleet } = useContent();
   const t = useT();
-  const [active, setActive] = useState<Vehicle | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  // Close on Escape and lock body scroll while the modal is open.
+  const close = useCallback(() => setActiveIndex(null), []);
+  const showPrev = useCallback(
+    () => setActiveIndex((i) => (i === null ? i : (i - 1 + fleet.length) % fleet.length)),
+    [fleet.length]
+  );
+  const showNext = useCallback(
+    () => setActiveIndex((i) => (i === null ? i : (i + 1) % fleet.length)),
+    [fleet.length]
+  );
+
+  // Close on Escape, navigate with arrow keys, and lock body scroll while open.
   useEffect(() => {
-    if (!active) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setActive(null);
+    if (activeIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft") showPrev();
+      else if (e.key === "ArrowRight") showNext();
+    };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [active]);
+  }, [activeIndex, close, showPrev, showNext]);
 
   return (
     <section id="fleet" className="section fleet">
@@ -41,12 +55,12 @@ export default function Fleet() {
         </div>
 
         <div className="fleet__grid">
-          {fleet.map((v) => (
+          {fleet.map((v, i) => (
             <button
               type="button"
               className="fleet-card reveal"
               key={v.image}
-              onClick={() => setActive(v)}
+              onClick={() => setActiveIndex(i)}
             >
               <div className="fleet-card__media">
                 <img src={images[v.image]} alt={`${v.name} — ${v.tier}`} />
@@ -75,14 +89,32 @@ export default function Fleet() {
         </div>
       </div>
 
-      {active && (
-        <FleetModal vehicle={active} onClose={() => setActive(null)} />
+      {activeIndex !== null && (
+        <FleetModal
+          vehicle={fleet[activeIndex]}
+          onClose={close}
+          onPrev={showPrev}
+          onNext={showNext}
+          showNav={fleet.length > 1}
+        />
       )}
     </section>
   );
 }
 
-function FleetModal({ vehicle, onClose }: { vehicle: Vehicle; onClose: () => void }) {
+function FleetModal({
+  vehicle,
+  onClose,
+  onPrev,
+  onNext,
+  showNav,
+}: {
+  vehicle: Vehicle;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+  showNav: boolean;
+}) {
   const t = useT();
   // Render at document.body so the fixed overlay escapes any ancestor
   // stacking/transform context and always covers the full viewport.
@@ -92,6 +124,25 @@ function FleetModal({ vehicle, onClose }: { vehicle: Vehicle; onClose: () => voi
         <button className="modal__close" aria-label={t.fleet.close} onClick={onClose}>
           <Icon name="close" size={20} />
         </button>
+
+        {showNav && (
+          <>
+            <button
+              className="modal__nav modal__nav--prev"
+              aria-label={t.fleet.prev}
+              onClick={onPrev}
+            >
+              <Icon name="arrow" size={20} />
+            </button>
+            <button
+              className="modal__nav modal__nav--next"
+              aria-label={t.fleet.next}
+              onClick={onNext}
+            >
+              <Icon name="arrow" size={20} />
+            </button>
+          </>
+        )}
 
         <div className="modal__media">
           <img src={images[vehicle.image]} alt={vehicle.name} />
