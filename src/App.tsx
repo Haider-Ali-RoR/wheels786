@@ -23,7 +23,7 @@ export default function App() {
         <Hero />
         <Stats />
         <Fleet />
-        <FixedRates />
+        {/* <FixedRates /> */}
         <Testimonials />
         <Services />
         <WhyUs />
